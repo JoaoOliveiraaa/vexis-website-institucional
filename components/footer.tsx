@@ -39,7 +39,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contato</h3>
             <div className="space-y-2 text-primary-foreground/80">
-              <p>vexiscontato@gmail.com</p>
+              <p>contatooficialvexis@gmail.com</p>
             </div>
           </div>
         </div>

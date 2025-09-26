@@ -113,7 +113,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-foreground">E-mail</h3>
-                    <p className="text-muted-foreground">vexiscontato@gmail.com</p>
+                    <p className="text-muted-foreground">contatooficialvexis@gmail.com</p>
                   </div>
                 </div>
               </CardContent>

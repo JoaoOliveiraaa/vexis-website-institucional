@@ -3,7 +3,7 @@ import { ExternalLink } from "lucide-react"
 
 const portfolioItems = [
   {
-    title: "E-commerce Fashion",
+    title: "E-commerce",
     description: "Loja virtual completa com sistema de pagamento integrado e gestão de estoque.",
     image: "/modern-ecommerce-fashion-website.jpg",
     category: "E-commerce",
