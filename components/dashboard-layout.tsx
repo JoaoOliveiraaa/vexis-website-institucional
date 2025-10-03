@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { LayoutDashboard, CheckSquare, UsersIcon, UserCircle, LogOut, Menu, X } from "lucide-react"
 import { useState } from "react"
+import Image from "next/image"
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -54,6 +55,13 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
       >
         <div className="flex flex-col h-full">
           <div className="p-6 border-b border-slate-200">
+               <Image
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-ueQtNpKhisOy3kQnA35pKR2Dhl8NJQ.jpg"
+                alt="VEXIS Logo"
+                width={32}
+                height={32}
+                className="rounded"
+              />
             <h1 className="text-2xl font-bold text-slate-900">Vexis</h1>
             <p className="text-sm text-slate-600 mt-1">Sistema de Gerenciamento</p>
           </div>
