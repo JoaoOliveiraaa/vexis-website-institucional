@@ -95,9 +95,19 @@ export function ContactSection() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                  <Send className="mr-2 h-4 w-4" />
-                  Enviar Mensagem
+                <Button 
+                  asChild
+                  type="button" 
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                >
+                  <a 
+                    href="https://wa.me/5516997741702?text=Olá! Gostaria de solicitar um orçamento." 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <Send className="mr-2 h-4 w-4" />
+                    Enviar Mensagem
+                  </a>
                 </Button>
               </form>
             </CardContent>

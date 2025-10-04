@@ -42,11 +42,18 @@ export function HeroSection() {
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button
+              asChild
               size="lg"
               className="bg-secondary text-secondary-foreground hover:bg-secondary/90 text-lg px-10 py-4 rounded-full shadow-2xl hover:shadow-secondary/25 transition-all duration-300 group"
             >
-              Fale Conosco
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <a 
+                href="https://wa.me/5516997741702?text=Olá! Gostaria de falar com vocês sobre um projeto." 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Fale Conosco
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </a>
             </Button>
             <Button
               size="lg"

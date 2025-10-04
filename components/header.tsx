@@ -54,8 +54,17 @@ export function Header() {
           </nav>
 
           <div className="hidden md:block">
-            <Button className="bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:from-primary/90 hover:to-secondary/90 px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-              Solicitar Orçamento
+            <Button 
+              asChild
+              className="bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:from-primary/90 hover:to-secondary/90 px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <a 
+                href="https://wa.me/5516997741702?text=Olá! Gostaria de solicitar um orçamento." 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Solicitar Orçamento
+              </a>
             </Button>
           </div>
 
@@ -101,8 +110,17 @@ export function Header() {
               >
                 Contato
               </a>
-              <Button className="bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:from-primary/90 hover:to-secondary/90 w-full mt-4 rounded-full">
-                Solicitar Orçamento
+              <Button 
+                asChild
+                className="bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:from-primary/90 hover:to-secondary/90 w-full mt-4 rounded-full"
+              >
+                <a 
+                  href="https://wa.me/5516997741702?text=Olá! Gostaria de solicitar um orçamento." 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  Solicitar Orçamento
+                </a>
               </Button>
             </nav>
           </div>
