@@ -6,11 +6,15 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
-import { Eye } from "lucide-react"
+import { Eye, Trash2 } from "lucide-react"
 import { useState } from "react"
 import { TaskDetailsDialog } from "@/components/task-details-dialog"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog"
+import { createClient } from "@/lib/supabase/client"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 interface TasksTableProps {
   tasks: Task[]
@@ -48,9 +52,12 @@ const priorityLabels = {
 
 export function TasksTable({ tasks, users, currentUserId }: TasksTableProps) {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
+  const [taskToDelete, setTaskToDelete] = useState<Task | null>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState<string>("all")
   const [priorityFilter, setPriorityFilter] = useState<string>("all")
+  const router = useRouter()
 
   const filteredTasks = tasks.filter((task) => {
     const matchesSearch =
@@ -60,6 +67,30 @@ export function TasksTable({ tasks, users, currentUserId }: TasksTableProps) {
     const matchesPriority = priorityFilter === "all" || task.priority === priorityFilter
     return matchesSearch && matchesStatus && matchesPriority
   })
+
+  const handleDeleteTask = async () => {
+    if (!taskToDelete) return
+
+    setIsDeleting(true)
+    try {
+      const supabase = createClient()
+      const { error } = await supabase.from("tasks").delete().eq("id", taskToDelete.id)
+
+      if (error) {
+        toast.error("Erro ao excluir tarefa")
+        console.error("Error deleting task:", error)
+      } else {
+        toast.success("Tarefa excluída com sucesso!")
+        router.refresh()
+      }
+    } catch (error) {
+      toast.error("Erro ao excluir tarefa")
+      console.error("Error deleting task:", error)
+    } finally {
+      setIsDeleting(false)
+      setTaskToDelete(null)
+    }
+  }
 
   return (
     <>
@@ -150,9 +181,19 @@ export function TasksTable({ tasks, users, currentUserId }: TasksTableProps) {
                       {formatDistanceToNow(new Date(task.created_at), { addSuffix: true, locale: ptBR })}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <Button variant="ghost" size="sm" onClick={() => setSelectedTask(task)}>
-                        <Eye className="h-4 w-4" />
-                      </Button>
+                      <div className="flex items-center gap-2">
+                        <Button variant="ghost" size="sm" onClick={() => setSelectedTask(task)}>
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          onClick={() => setTaskToDelete(task)}
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -171,6 +212,29 @@ export function TasksTable({ tasks, users, currentUserId }: TasksTableProps) {
           onOpenChange={(open) => !open && setSelectedTask(null)}
         />
       )}
+
+      <AlertDialog open={!!taskToDelete} onOpenChange={(open) => !open && setTaskToDelete(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirmar Exclusão</AlertDialogTitle>
+            <AlertDialogDescription>
+              Tem certeza que deseja excluir a tarefa <strong>"{taskToDelete?.title}"</strong>?
+              <br />
+              Esta ação não pode ser desfeita.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteTask}
+              disabled={isDeleting}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              {isDeleting ? "Excluindo..." : "Excluir"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   )
 }
