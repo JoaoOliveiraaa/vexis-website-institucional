@@ -60,7 +60,7 @@ export default function TrafegoPagoPage() {
                 Tráfego Pago
               </Badge>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-white">
-                Gere <span className="text-primary">Leads e Vendas</span> com Anúncios Online
+                Gere <span className="text-primary text-white">Leads e Vendas</span> com Anúncios Online
               </h1>
               <p className="text-lg md:text-xl text-gray-200 mb-8 text-pretty">
                 Gestão profissional de campanhas de tráfego pago no Google Ads, Meta Ads e outras plataformas. Maximize

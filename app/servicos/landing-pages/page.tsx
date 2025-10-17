@@ -62,7 +62,7 @@ export default function LandingPagesPage() {
                 Landing Pages
               </Badge>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-white">
-                Páginas que <span className="text-primary">Convertem Visitantes em Clientes</span>
+                Páginas que <span className="text-primary text-white">Convertem Visitantes em Clientes</span>
               </h1>
               <p className="text-lg md:text-xl text-gray-200 mb-8 text-pretty">
                 Desenvolvemos landing pages estratégicas e otimizadas para capturar leads, promover produtos e maximizar

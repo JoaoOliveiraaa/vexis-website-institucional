@@ -60,7 +60,7 @@ export default function RedesSociaisPage() {
                 Redes Sociais
               </Badge>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-white">
-                Gestão <span className="text-primary">Profissional</span> de Redes Sociais
+                Gestão <span className="text-primary text-white">Profissional</span> de Redes Sociais
               </h1>
               <p className="text-lg md:text-xl text-gray-200 mb-8 text-pretty">
                 Gerenciamos suas redes sociais com estratégia, criatividade e foco em resultados. Cresça sua presença

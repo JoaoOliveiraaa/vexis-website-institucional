@@ -60,7 +60,7 @@ export default function IdentidadeVisualPage() {
                 Identidade Visual
               </Badge>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-white">
-                Crie uma <span className="text-primary">Marca Memorável</span> e Profissional
+                Crie uma <span className="text-primary text-white">Marca Memorável</span> e Profissional
               </h1>
               <p className="text-lg md:text-xl text-gray-200 mb-8 text-pretty">
                 Desenvolvemos identidades visuais completas que transmitem os valores da sua marca e criam conexão com

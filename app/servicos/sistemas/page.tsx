@@ -94,7 +94,7 @@ export default function SistemasPage() {
               Sistemas Personalizados
             </Badge>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-white">
-              Sistemas Sob Medida para <span className="text-primary">Otimizar seu Negócio</span>
+              Sistemas Sob Medida para <span className="text-primary text-white">Otimizar seu Negócio</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-200 mb-8 text-pretty">
               Desenvolvemos sistemas personalizados de gestão, estoque, agendamento, CRM e muito mais. Soluções

@@ -62,10 +62,10 @@ export default function SobrePage() {
             <Badge className="mb-4" variant="secondary">
               Sobre a VEXIS
             </Badge>
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance">
-              Transformando Ideias em <span className="text-primary">Soluções Digitais</span>
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-white">
+              Transformando Ideias em <span className="text-primary bg-gradient-to-r from-secondary to-secondary/80 bg-clip-text text-transparent">Soluções Digitais</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground text-pretty">
+            <p className="text-lg md:text-xl text-muted-foreground text-pretty text-white">
               Somos uma empresa especializada em desenvolvimento web, design e marketing digital, comprometida em
               impulsionar o crescimento dos nossos clientes através de soluções tecnológicas inovadoras e estratégias
               digitais eficazes.

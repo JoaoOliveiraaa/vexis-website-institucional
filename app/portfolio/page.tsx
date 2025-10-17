@@ -71,7 +71,7 @@ export default function PortfolioPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-background" />
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
 
-        <div className="container relative">
+        <div className="container relative mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <Badge className="mb-4" variant="secondary">
               Nosso Portfólio
@@ -89,7 +89,7 @@ export default function PortfolioPage() {
 
       {/* Portfolio Grid */}
       <section className="py-20">
-        <div className="container">
+        <div className="container mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <Card key={index} className="group overflow-hidden hover:shadow-lg transition-all duration-300">
@@ -128,7 +128,7 @@ export default function PortfolioPage() {
 
       {/* CTA Section */}
       <section className="py-20 bg-muted/30">
-        <div className="container">
+        <div className="container mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Seu Projeto Pode Ser o Próximo</h2>
             <p className="text-lg text-muted-foreground mb-8">

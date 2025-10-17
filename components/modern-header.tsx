@@ -100,10 +100,10 @@ export function ModernHeader() {
                       <NavigationMenuLink asChild>
                         <Link
                           href={service.href}
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground hover:text-white focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none text-foreground">{service.title}</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-foreground">
+                          <div className="text-sm font-medium leading-none text-foreground hover:text-white">{service.title}</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-foreground hover:text-white">
                             {service.description}
                           </p>
                         </Link>

@@ -60,7 +60,7 @@ export default function AplicativosPage() {
                 Aplicativos Mobile
               </Badge>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-white">
-                Apps <span className="text-primary">Personalizados</span> para iOS e Android
+                Apps <span className="text-primary text-white">Personalizados</span> para iOS e Android
               </h1>
               <p className="text-lg md:text-xl text-gray-200 mb-8 text-pretty">
                 Desenvolvemos aplicativos mobile nativos e híbridos com design moderno, performance excepcional e

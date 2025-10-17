@@ -60,7 +60,7 @@ export default function EcommercePage() {
                 E-commerce
               </Badge>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-white">
-                Loja Virtual <span className="text-primary">Completa</span> para seu Negócio
+                Loja Virtual <span className="text-primary text-white">Completa</span> para seu Negócio
               </h1>
               <p className="text-lg md:text-xl text-gray-200 mb-8 text-pretty">
                 Desenvolvemos lojas virtuais profissionais e completas, com todos os recursos necessários para vender
