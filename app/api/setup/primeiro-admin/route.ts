@@ -1,15 +1,15 @@
-import { createClient } from "@/lib/supabase/client"
+import { createServiceClient } from "@/lib/supabase/service"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
   try {
     const { email, password, fullName } = await request.json()
 
-    console.log("[v0] Criando primeiro admin via signup...")
+    console.log("[v0] Criando primeiro admin via service role...")
     console.log("[v0] Email:", email)
 
-    // Criar cliente Supabase
-    const supabase = createClient()
+    // Criar cliente Supabase (service role)
+    const supabase = createServiceClient()
 
     // Primeiro, verificar se já existe algum usuário admin
     const { data: existingUsers, error: checkError } = await supabase
@@ -30,15 +30,13 @@ export async function POST(request: Request) {
       )
     }
 
-    // Criar usuário via signup (não precisa de service role key)
-    const { data: authData, error: authError } = await supabase.auth.signUp({
+    // Criar usuário via Admin API (requer service role key)
+    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
       email,
       password,
-      options: {
-        data: {
-          full_name: fullName,
-        },
-        emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || window.location.origin,
+      email_confirm: true,
+      user_metadata: {
+        full_name: fullName,
       },
     })
 
@@ -53,7 +51,7 @@ export async function POST(request: Request) {
 
     console.log("[v0] Auth criado, ID:", authData.user.id)
 
-    // Inserir na tabela users como admin
+    // Inserir na tabela users como admin (service client ignora RLS)
     const { error: dbError } = await supabase.from("users").insert({
       id: authData.user.id,
       email: email,
