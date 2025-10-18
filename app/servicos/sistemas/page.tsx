@@ -116,7 +116,7 @@ export default function SistemasPage() {
 
       {/* Systems Grid */}
       <section className="py-20">
-        <div className="container">
+        <div className="container mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">Tipos de Sistemas que Desenvolvemos</h2>
             <p className="text-lg text-muted-foreground">
@@ -145,7 +145,7 @@ export default function SistemasPage() {
 
       {/* Benefits Section */}
       <section className="py-20 bg-muted/30">
-        <div className="container">
+        <div className="container mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">Vantagens dos Nossos Sistemas</h2>
           </div>
@@ -171,7 +171,7 @@ export default function SistemasPage() {
 
       {/* Features Section */}
       <section className="py-20">
-        <div className="container">
+        <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <Card className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground border-0">
               <CardContent className="p-8">
