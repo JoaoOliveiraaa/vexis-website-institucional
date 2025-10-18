@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     "Desenvolvemos soluções digitais para escalar seu negócio com confiança. Analytics, E-commerce, Landing Pages, Sites Institucionais e Tráfego Pago.",
   generator: "VEXIS",
   icons: {
-    icon: "/logo.jpeg",
-    shortcut: "/logo.jpeg",
-    apple: "/logo.jpeg",
+    icon: "/logo.jpg",
+    shortcut: "/logo.jpg",
+    apple: "/logo.jpg",
   },
 }
 
