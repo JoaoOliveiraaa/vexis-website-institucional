@@ -143,6 +143,24 @@
   label {
     @apply font-sans; /* Poppins for body text */
   }
+
+  /* Force navigation menu text visibility */
+  [data-slot="navigation-menu-viewport"] {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  [data-slot="navigation-menu-viewport"] * {
+    color: inherit !important;
+  }
+  
+  [data-slot="navigation-menu-viewport"] .text-sm {
+    color: #111827 !important;
+  }
+  
+  [data-slot="navigation-menu-viewport"] .line-clamp-2 {
+    color: #4B5563 !important;
+  }
 }
 
 /* Added geometric background patterns */

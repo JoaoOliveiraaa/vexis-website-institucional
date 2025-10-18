@@ -12,8 +12,8 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, ChevronRight } from "lucide-react"
-import { useState } from "react"
+import { Menu, ChevronRight, ChevronDown } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
 
 const services = [
   {
@@ -65,6 +65,22 @@ const services = [
 
 export function ModernHeader() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isServicesOpen, setIsServicesOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsServicesOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -81,64 +97,68 @@ export function ModernHeader() {
         </Link>
 
         {/* Desktop Navigation */}
-        <NavigationMenu className="hidden lg:flex">
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                  Início
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+        <nav className="hidden lg:flex items-center space-x-8">
+          <Link 
+            href="/" 
+            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+          >
+            Início
+          </Link>
 
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Serviços</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[600px] gap-3 p-4 md:grid-cols-2">
+          {/* Custom Services Dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+              className="flex items-center space-x-1 text-sm font-medium text-foreground hover:text-primary transition-colors"
+            >
+              <span>Serviços</span>
+              <ChevronDown className={`h-4 w-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {isServicesOpen && (
+              <div className="absolute top-full left-0 mt-2 w-[600px] bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                <div className="grid grid-cols-2 gap-3 p-4">
                   {services.map((service) => (
-                    <li key={service.href}>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          href={service.href}
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground hover:text-black"
-                        >
-                          <div className="text-sm font-medium leading-none text-foreground hover:text-black">{service.title}</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-foreground hover:text-black">
-                            {service.description}
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
+                    <Link
+                      key={service.href}
+                      href={service.href}
+                      className="block p-3 rounded-md hover:bg-gray-100 transition-colors"
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      <div className="text-sm font-medium text-gray-900 mb-1">
+                        {service.title}
+                      </div>
+                      <p className="text-sm text-gray-600 line-clamp-2">
+                        {service.description}
+                      </p>
+                    </Link>
                   ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
+                </div>
+              </div>
+            )}
+          </div>
 
-            <NavigationMenuItem>
-              <Link href="/portfolio" legacyBehavior passHref>
-                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                  Portfólio
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+          <Link 
+            href="/portfolio" 
+            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+          >
+            Portfólio
+          </Link>
 
-            <NavigationMenuItem>
-              <Link href="/sobre" legacyBehavior passHref>
-                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                  Sobre
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+          <Link 
+            href="/sobre" 
+            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+          >
+            Sobre
+          </Link>
 
-            <NavigationMenuItem>
-              <Link href="/contato" legacyBehavior passHref>
-                <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                  Contato
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+          <Link 
+            href="/contato" 
+            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+          >
+            Contato
+          </Link>
+        </nav>
 
         <div className="flex items-center gap-4">
           <Button asChild className="hidden lg:inline-flex">
