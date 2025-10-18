@@ -42,7 +42,7 @@ export default function ContatoPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-background" />
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
 
-        <div className="container relative">
+        <div className="container relative mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <Badge className="mb-4" variant="secondary">
               Entre em Contato
@@ -60,7 +60,7 @@ export default function ContatoPage() {
 
       {/* Contact Info Cards */}
       <section className="py-12">
-        <div className="container">
+        <div className="container mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {contactInfo.map((info, index) => {
               const Icon = info.icon
