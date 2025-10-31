@@ -4,79 +4,78 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated color palette to use VEXIS blue theme */
-  --background: oklch(0.98 0.005 240);
-  --foreground: oklch(0.15 0.02 240);
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.15 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.02 240);
+  --card-foreground: oklch(0.15 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.02 240);
-  --primary: oklch(0.15 0.08 240); /* VEXIS dark blue */
-  --primary-foreground: oklch(0.98 0.005 240);
-  --secondary: oklch(0.45 0.15 220); /* VEXIS bright blue */
-  --secondary-foreground: oklch(0.98 0.005 240);
-  --muted: oklch(0.95 0.01 240);
-  --muted-foreground: oklch(0.5 0.02 240);
-  --accent: oklch(0.45 0.15 220); /* VEXIS bright blue for icons */
-  --accent-foreground: oklch(0.98 0.005 240);
+  --popover-foreground: oklch(0.15 0 0);
+  --primary: oklch(0.55 0.18 285);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0.01 285);
+  --secondary-foreground: oklch(0.15 0 0);
+  --muted: oklch(0.96 0.01 285);
+  --muted-foreground: oklch(0.5 0.02 285);
+  --accent: oklch(0.65 0.2 195);
+  --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0.005 240);
-  --border: oklch(0.9 0.01 240);
-  --input: oklch(0.95 0.01 240);
-  --ring: oklch(0.45 0.15 220);
-  --chart-1: oklch(0.45 0.15 220);
-  --chart-2: oklch(0.35 0.12 200);
-  --chart-3: oklch(0.25 0.08 180);
-  --chart-4: oklch(0.55 0.18 240);
-  --chart-5: oklch(0.65 0.2 260);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.92 0.01 285);
+  --input: oklch(0.92 0.01 285);
+  --ring: oklch(0.55 0.18 285);
+  --chart-1: oklch(0.55 0.18 285);
+  --chart-2: oklch(0.65 0.2 195);
+  --chart-3: oklch(0.6 0.19 240);
+  --chart-4: oklch(0.7 0.15 210);
+  --chart-5: oklch(0.5 0.16 270);
   --radius: 0.75rem;
-  --sidebar: oklch(0.98 0.005 240);
-  --sidebar-foreground: oklch(0.15 0.02 240);
-  --sidebar-primary: oklch(0.15 0.08 240);
-  --sidebar-primary-foreground: oklch(0.98 0.005 240);
-  --sidebar-accent: oklch(0.95 0.01 240);
-  --sidebar-accent-foreground: oklch(0.15 0.02 240);
-  --sidebar-border: oklch(0.9 0.01 240);
-  --sidebar-ring: oklch(0.45 0.15 220);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
-  --background: oklch(0.08 0.02 240); /* Dark VEXIS blue background */
-  --foreground: oklch(0.95 0.005 240);
-  --card: oklch(0.12 0.03 240);
-  --card-foreground: oklch(0.95 0.005 240);
-  --popover: oklch(0.08 0.02 240);
-  --popover-foreground: oklch(0.95 0.005 240);
-  --primary: oklch(0.45 0.15 220); /* Bright blue for primary in dark mode */
-  --primary-foreground: oklch(0.08 0.02 240);
-  --secondary: oklch(0.15 0.08 240);
-  --secondary-foreground: oklch(0.95 0.005 240);
-  --muted: oklch(0.15 0.03 240);
-  --muted-foreground: oklch(0.7 0.01 240);
-  --accent: oklch(0.45 0.15 220); /* Bright blue for accents */
-  --accent-foreground: oklch(0.08 0.02 240);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.95 0.005 240);
-  --border: oklch(0.2 0.03 240);
-  --input: oklch(0.15 0.03 240);
-  --ring: oklch(0.45 0.15 220);
-  --sidebar: oklch(0.08 0.02 240);
-  --sidebar-foreground: oklch(0.95 0.005 240);
-  --sidebar-primary: oklch(0.45 0.15 220);
-  --sidebar-primary-foreground: oklch(0.08 0.02 240);
-  --sidebar-accent: oklch(0.15 0.03 240);
-  --sidebar-accent-foreground: oklch(0.95 0.005 240);
-  --sidebar-border: oklch(0.2 0.03 240);
-  --sidebar-ring: oklch(0.45 0.15 220);
+  --background: oklch(0.1 0.01 285);
+  --foreground: oklch(0.98 0.01 285);
+  --card: oklch(0.13 0.01 285);
+  --card-foreground: oklch(0.98 0.01 285);
+  --popover: oklch(0.13 0.01 285);
+  --popover-foreground: oklch(0.98 0.01 285);
+  --primary: oklch(0.65 0.2 285);
+  --primary-foreground: oklch(0.1 0.01 285);
+  --secondary: oklch(0.2 0.02 285);
+  --secondary-foreground: oklch(0.98 0.01 285);
+  --muted: oklch(0.2 0.02 285);
+  --muted-foreground: oklch(0.6 0.03 285);
+  --accent: oklch(0.7 0.22 195);
+  --accent-foreground: oklch(0.1 0.01 285);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.98 0.01 285);
+  --border: oklch(0.2 0.02 285);
+  --input: oklch(0.2 0.02 285);
+  --ring: oklch(0.65 0.2 285);
+  --chart-1: oklch(0.65 0.2 285);
+  --chart-2: oklch(0.7 0.22 195);
+  --chart-3: oklch(0.65 0.21 240);
+  --chart-4: oklch(0.75 0.18 210);
+  --chart-5: oklch(0.6 0.19 270);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
 }
 
 @theme inline {
-  /* Added font variables for Montserrat and Poppins */
-  --font-montserrat: var(--font-montserrat);
-  --font-poppins: var(--font-poppins);
-  --font-sans: var(--font-poppins); /* Default body font */
-  --font-serif: var(--font-montserrat); /* For headings */
-
+  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -120,42 +119,34 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans;
-  }
-
-  /* Typography classes for consistent font usage */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-serif; /* Montserrat for headings */
-  }
-
-  p,
-  span,
-  div,
-  a,
-  button,
-  input,
-  textarea,
-  label {
-    @apply font-sans; /* Poppins for body text */
+    @apply bg-background text-foreground;
   }
 }
 
-/* Added geometric background patterns */
-.geometric-bg {
-  background-image: radial-gradient(circle at 25% 25%, oklch(0.15 0.08 240 / 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, oklch(0.45 0.15 220 / 0.1) 0%, transparent 50%);
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.geometric-pattern {
-  background-image: linear-gradient(45deg, oklch(0.15 0.08 240 / 0.05) 25%, transparent 25%),
-    linear-gradient(-45deg, oklch(0.15 0.08 240 / 0.05) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, oklch(0.45 0.15 220 / 0.05) 75%),
-    linear-gradient(-45deg, transparent 75%, oklch(0.45 0.15 220 / 0.05) 75%);
-  background-size: 60px 60px;
-  background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
 }

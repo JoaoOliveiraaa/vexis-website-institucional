@@ -1,105 +1,69 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Zap, Globe, Target, Smartphone, Settings, Palette, Camera, Users, Wrench } from "lucide-react"
+"use client"
+
+import { Card } from "@/components/ui/card"
+import { Globe, Smartphone, Database, Palette, Cloud, Shield } from "lucide-react"
 
 const services = [
   {
-    icon: Zap,
-    title: "Landing Pages",
-    description:
-      "Páginas de alta conversão focadas em resultados e geração de leads qualificados com design otimizado.",
-  },
-  {
     icon: Globe,
-    title: "Sites Institucionais",
-    description: "Websites profissionais que transmitem credibilidade e fortalecem sua marca no mercado digital.",
+    title: "Desenvolvimento Web",
+    description: "Sites e aplicações web modernas, responsivas e de alta performance",
   },
   {
     icon: Smartphone,
-    title: "Aplicativos",
-    description: "Apps móveis e web personalizados para otimizar processos e melhorar a experiência do usuário.",
+    title: "Apps Mobile",
+    description: "Aplicativos nativos e híbridos para iOS e Android",
   },
   {
-    icon: Settings,
-    title: "Micro SaaS",
-    description:
-      "Desenvolvimento de sistemas especializados para automatizar e escalar operações específicas do seu negócio.",
+    icon: Database,
+    title: "Backend & APIs",
+    description: "Arquiteturas escaláveis e APIs robustas para seus sistemas",
   },
   {
     icon: Palette,
-    title: "Identidade Visual",
-    description: "Criação completa de logo, paleta de cores, tipografia e elementos visuais para fortalecer sua marca.",
+    title: "UI/UX Design",
+    description: "Interfaces intuitivas e experiências memoráveis para seus usuários",
   },
   {
-    icon: Target,
-    title: "Tráfego Pago",
-    description: "Campanhas estratégicas no Google Ads e Meta Ads para maximizar ROI e alcançar seu público-alvo.",
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    description: "Infraestrutura em nuvem e automação de processos",
   },
   {
-    icon: Users,
-    title: "Redes Sociais",
-    description:
-      "Gestão profissional de Instagram, Facebook, TikTok e WhatsApp para engajar e converter sua audiência.",
-  },
-  {
-    icon: Camera,
-    title: "Fotografia e Vídeos",
-    description: "Produção audiovisual de eventos corporativos e conteúdo promocional de alta qualidade.",
-  },
-  {
-    icon: Wrench,
-    title: "Suporte Técnico",
-    description: "Montagem, manutenção e suporte especializado para equipamentos de TI e infraestrutura tecnológica.",
+    icon: Shield,
+    title: "Segurança",
+    description: "Proteção de dados e conformidade com as melhores práticas",
   },
 ]
 
 export function ServicesSection() {
   return (
-    <section id="servicos" className="py-24 bg-background relative overflow-hidden">
-      <div className="absolute inset-0 geometric-pattern opacity-30"></div>
-      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-secondary/10 to-primary/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6 text-balance">Nossos Serviços</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed">
-            Soluções completas e especializadas para transformar sua presença digital e acelerar o crescimento do seu
-            negócio com tecnologia de ponta.
+    <section id="servicos" className="py-24 sm:py-32 bg-muted/30">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-balance">
+            Nossos Serviços
+          </h2>
+          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+            Oferecemos soluções completas para transformar sua visão em realidade
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <Card
               key={index}
-              className="group hover:shadow-2xl transition-all duration-500 border-border hover:border-secondary/30 bg-card/80 backdrop-blur-sm hover:scale-105 relative overflow-hidden"
+              className="p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-card border-border/50"
             >
-              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-secondary/20 to-transparent rounded-bl-full"></div>
-              <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-primary/20 to-transparent rounded-tr-full"></div>
-
-              <CardHeader className="text-center pb-6 relative z-10">
-                <div className="mx-auto w-20 h-20 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-2xl flex items-center justify-center mb-6 group-hover:from-secondary/30 group-hover:to-primary/30 transition-all duration-300 shadow-lg">
-                  <service.icon className="h-10 w-10 text-secondary group-hover:scale-110 transition-transform duration-300" />
+              <div className="space-y-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent text-primary-foreground">
+                  <service.icon className="h-6 w-6" />
                 </div>
-                <CardTitle className="text-xl font-bold text-foreground group-hover:text-secondary transition-colors duration-300">
-                  {service.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="relative z-10">
-                <CardDescription className="text-center text-muted-foreground leading-relaxed text-base">
-                  {service.description}
-                </CardDescription>
-              </CardContent>
+                <h3 className="text-xl font-semibold">{service.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              </div>
             </Card>
           ))}
-        </div>
-
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-4 bg-gradient-to-r from-primary to-secondary p-1 rounded-full">
-            <div className="bg-background rounded-full px-8 py-4">
-              <p className="text-lg font-semibold text-foreground">Pronto para transformar seu negócio?</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>

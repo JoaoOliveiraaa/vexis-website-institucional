@@ -1,0 +1,149 @@
+"use client"
+
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils"
+import {
+  LayoutDashboard,
+  CheckSquare,
+  FolderKanban,
+  Users,
+  DollarSign,
+  Settings,
+  UserCog,
+  Building2,
+  BarChart3,
+  Plug,
+} from "lucide-react"
+import Image from "next/image"
+
+interface DashboardNavProps {
+  userRole: string
+}
+
+export function DashboardNav({ userRole }: DashboardNavProps) {
+  const pathname = usePathname()
+
+  const navItems = [
+    {
+      title: "Dashboard",
+      href: "/tarefas",
+      icon: LayoutDashboard,
+    },
+    {
+      title: "Tarefas",
+      href: "/tarefas/tarefas/tasks",
+      icon: CheckSquare,
+    },
+    {
+      title: "Projetos",
+      href: "/tarefas/tarefas/projects",
+      icon: FolderKanban,
+    },
+    {
+      title: "Leads",
+      href: "/tarefas/tarefas/leads",
+      icon: Users,
+    },
+    {
+      title: "Clientes",
+      href: "/tarefas/tarefas/clients",
+      icon: Building2,
+    },
+    {
+      title: "Financeiro",
+      href: "/tarefas/tarefas/financial",
+      icon: DollarSign,
+    },
+    {
+      title: "Relatórios",
+      href: "/tarefas/tarefas/reports",
+      icon: BarChart3,
+    },
+  ]
+
+  const adminItems = [
+    {
+      title: "Integrações",
+      href: "/tarefas/tarefas/integrations",
+      icon: Plug,
+    },
+    {
+      title: "Usuários",
+      href: "/tarefas/tarefas/users",
+      icon: UserCog,
+    },
+    {
+      title: "Configurações",
+      href: "/tarefas/tarefas/settings",
+      icon: Settings,
+    },
+  ]
+
+  return (
+    <aside className="hidden lg:block w-64 border-r bg-card">
+      <div className="p-6 border-b">
+        <div className="flex items-center gap-3">
+          <Image
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%281%29-wOYbYYaL7fwcyhIZM308jfylREAGrO.png"
+            alt="Vexis Logo"
+            width={40}
+            height={40}
+            className="object-contain"
+          />
+          <div>
+            <h1 className="text-2xl font-bold bg-gradient-to-br from-primary via-[oklch(0.6_0.19_240)] to-accent bg-clip-text text-transparent">
+              Vexis
+            </h1>
+            <p className="text-sm text-muted-foreground">Gestão Interna</p>
+          </div>
+        </div>
+      </div>
+      <nav className="px-3 py-4 space-y-1">
+        {navItems.map((item) => {
+          const Icon = item.icon
+          const isActive = pathname === item.href
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                isActive
+                  ? "bg-gradient-to-r from-primary/10 to-accent/10 text-primary border-l-2 border-primary"
+                  : "text-muted-foreground hover:bg-accent/10 hover:text-accent",
+              )}
+            >
+              <Icon className="h-5 w-5" />
+              {item.title}
+            </Link>
+          )
+        })}
+        {userRole === "admin" && (
+          <>
+            <div className="my-4 border-t" />
+            {adminItems.map((item) => {
+              const Icon = item.icon
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                    isActive
+                      ? "bg-gradient-to-r from-primary/10 to-accent/10 text-primary border-l-2 border-primary"
+                      : "text-muted-foreground hover:bg-accent/10 hover:text-accent",
+                  )}
+                >
+                  <Icon className="h-5 w-5" />
+                  {item.title}
+                </Link>
+              )
+            })}
+          </>
+        )}
+      </nav>
+    </aside>
+  )
+}

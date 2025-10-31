@@ -1,111 +1,62 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle, Users, Award, Zap, Target, Shield } from "lucide-react"
+"use client"
+
+import { Card } from "@/components/ui/card"
+import { Code2, Lightbulb, Rocket, Users } from "lucide-react"
 
 const values = [
   {
-    icon: CheckCircle,
-    title: "Compromisso",
-    description: "Honramos todos os prazos e entregas acordadas com nossos clientes.",
+    icon: Lightbulb,
+    title: "Inovação",
+    description: "Buscamos constantemente novas tecnologias e abordagens para entregar soluções de ponta",
+  },
+  {
+    icon: Code2,
+    title: "Excelência Técnica",
+    description: "Código limpo, arquitetura sólida e as melhores práticas de desenvolvimento",
   },
   {
     icon: Users,
-    title: "Parceria",
-    description: "Trabalhamos como uma extensão da sua equipe, focados no seu sucesso.",
+    title: "Foco no Cliente",
+    description: "Seu sucesso é nossa prioridade. Trabalhamos lado a lado para alcançar seus objetivos",
   },
   {
-    icon: Award,
-    title: "Qualidade",
-    description: "Entregamos soluções de alta qualidade que superam expectativas.",
-  },
-  {
-    icon: Zap,
-    title: "Resultados",
-    description: "Nosso foco está sempre nos resultados e no crescimento do seu negócio.",
-  },
-  {
-    icon: Target,
-    title: "Precisão",
-    description: "Estratégias direcionadas e personalizadas para cada cliente.",
-  },
-  {
-    icon: Shield,
-    title: "Confiança",
-    description: "Transparência total em todos os processos e comunicação.",
+    icon: Rocket,
+    title: "Agilidade",
+    description: "Entregas rápidas e iterativas, adaptando-nos às suas necessidades em tempo real",
   },
 ]
 
 export function AboutSection() {
   return (
-    <section id="sobre" className="py-24 bg-muted/30 relative overflow-hidden">
-      <div className="absolute inset-0 geometric-pattern opacity-20"></div>
-      <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-secondary/10 to-transparent rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-primary/10 to-transparent rounded-full blur-3xl"></div>
+    <section id="sobre" className="py-24 sm:py-32">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-balance">Quem Somos</h2>
+          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+            Somos uma equipe apaixonada por tecnologia, dedicada a criar experiências digitais excepcionais que fazem a
+            diferença
+          </p>
+        </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div>
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-2 bg-secondary/10 rounded-full px-4 py-2 mb-4">
-                <div className="w-2 h-2 bg-secondary rounded-full"></div>
-                <span className="text-sm font-medium text-secondary">Sobre Nós</span>
-              </div>
-            </div>
-
-            <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-8 text-balance">
-              Sobre a <span className="text-secondary">VEXIS</span>
-            </h2>
-
-            <div className="space-y-6 text-muted-foreground leading-relaxed text-lg">
-              <p>
-                A VEXIS é uma empresa especializada em tecnologia digital, focada em entregar soluções que realmente
-                fazem a diferença no crescimento dos nossos clientes.
-              </p>
-              <p>
-                Nossa missão é transformar ideias em resultados concretos através de estratégias digitais eficazes,
-                desenvolvimento de alta qualidade e um atendimento que prioriza a confiança e a transparência.
-              </p>
-              <p>
-                Trabalhamos com empresas de todos os portes, desde startups até grandes corporações, sempre com o mesmo
-                compromisso: entregar excelência e superar expectativas.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-border">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-secondary mb-2">5+</div>
-                <div className="text-sm text-muted-foreground">Anos de Experiência</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-secondary mb-2">50+</div>
-                <div className="text-sm text-muted-foreground">Projetos Concluídos</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-secondary mb-2">98%</div>
-                <div className="text-sm text-muted-foreground">Clientes Satisfeitos</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {values.map((value, index) => (
-              <Card
-                key={index}
-                className="text-center p-6 hover:shadow-xl transition-all duration-500 border-border hover:border-secondary/30 bg-card/80 backdrop-blur-sm hover:scale-105 relative overflow-hidden group"
-              >
-                <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-secondary/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                <CardContent className="p-0 relative z-10">
-                  <div className="w-16 h-16 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-secondary/30 group-hover:to-primary/30 transition-all duration-300">
-                    <value.icon className="h-8 w-8 text-secondary group-hover:scale-110 transition-transform duration-300" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {values.map((value, index) => (
+            <Card
+              key={index}
+              className="p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-border/50"
+            >
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <value.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-secondary transition-colors duration-300">
-                    {value.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold">{value.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
       </div>
     </section>

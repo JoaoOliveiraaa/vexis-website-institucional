@@ -1,88 +1,98 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Play } from "lucide-react"
+import { ArrowRight, Sparkles } from "lucide-react"
+import { useEffect, useRef } from "react"
 
 export function HeroSection() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    canvas.width = canvas.offsetWidth
+    canvas.height = canvas.offsetHeight
+
+    const particles: Array<{
+      x: number
+      y: number
+      vx: number
+      vy: number
+      size: number
+    }> = []
+
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1,
+      })
+    }
+
+    function animate() {
+      if (!ctx || !canvas) return
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      particles.forEach((particle) => {
+        particle.x += particle.vx
+        particle.y += particle.vy
+
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1
+
+        ctx.beginPath()
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
+        ctx.fillStyle = "rgba(139, 92, 246, 0.3)"
+        ctx.fill()
+      })
+
+      requestAnimationFrame(animate)
+    }
+
+    animate()
+  }, [])
+
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center bg-primary text-primary-foreground overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/90" />
-      <div className="absolute inset-0 geometric-bg opacity-40" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-30" />
 
-      {/* Floating geometric shapes */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-secondary/20 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-48 h-48 bg-secondary/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
-      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-secondary/30 to-transparent rounded-lg rotate-45 animate-bounce delay-500"></div>
-      <div className="absolute bottom-1/3 right-1/3 w-16 h-16 bg-gradient-to-tl from-secondary/40 to-transparent rounded-full animate-ping delay-700"></div>
-
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-8">
-            <div className="inline-flex items-center gap-2 bg-secondary/20 backdrop-blur-sm rounded-full px-6 py-2 mb-6 border border-secondary/30">
-              <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-primary-foreground/90">
-                Tecnologia • Estratégia • Resultados
-              </span>
-            </div>
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in-up">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
+            <Sparkles className="h-4 w-4" />
+            Inovação em Tecnologia
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 text-balance leading-tight">
-            Tecnologia que{" "}
-            <span className="bg-gradient-to-r from-secondary to-secondary/80 bg-clip-text text-transparent">
-              converte
-            </span>
-            <br />
-            <span className="text-4xl sm:text-5xl lg:text-6xl">Estratégia que escala</span>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-balance">
+            Transformando{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4]">ideias</span>{" "}
+            em realidade digital
           </h1>
 
-          <p className="text-xl sm:text-2xl text-primary-foreground/90 mb-12 max-w-3xl mx-auto text-pretty leading-relaxed">
-            Desenvolvemos soluções digitais completas para escalar seu negócio com confiança e resultados mensuráveis.
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
+            Desenvolvemos soluções tecnológicas inovadoras que impulsionam o crescimento do seu negócio com excelência e
+            criatividade
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-secondary text-secondary-foreground hover:bg-secondary/90 text-lg px-10 py-4 rounded-full shadow-2xl hover:shadow-secondary/25 transition-all duration-300 group"
-            >
-              <a 
-                href="https://wa.me/5516997741702?text=Olá! Gostaria de falar com vocês sobre um projeto." 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                Fale Conosco
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <Button size="lg" className="group">
+              Começar Agora
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 text-lg px-10 py-4 bg-transparent rounded-full backdrop-blur-sm hover:border-secondary/50 transition-all duration-300 group"
-            >
-              <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              Ver Portfólio
+            <Button size="lg" variant="outline">
+              Conheça Nossos Projetos
             </Button>
-          </div>
-
-          <div className="mt-16 flex flex-wrap justify-center items-center gap-8 text-primary-foreground/70">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-secondary">50+</div>
-              <div className="text-sm">Projetos Entregues</div>
-            </div>
-            <div className="w-px h-8 bg-primary-foreground/20"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-secondary">98%</div>
-              <div className="text-sm">Satisfação</div>
-            </div>
-            <div className="w-px h-8 bg-primary-foreground/20"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-secondary">24h</div>
-              <div className="text-sm">Suporte</div>
-            </div>
           </div>
         </div>
       </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
     </section>
   )
 }

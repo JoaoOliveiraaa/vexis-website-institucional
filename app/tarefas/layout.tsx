@@ -1,16 +1,30 @@
 import type React from "react"
-import { createClient } from "@/lib/supabase/server"
+import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import "./globals.css"
 
-export default async function TarefasLayout({ children }: { children: React.ReactNode }) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+const _geist = Geist({ subsets: ["latin"] })
+const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
-  // If no user and not on login page, redirect to login
-  if (!user) {
-    return <>{children}</>
-  }
+export const metadata: Metadata = {
+  title: "Vexis - Sistema de Gestão Interna",
+  description: "Sistema de gerenciamento interno da Vexis para tarefas, projetos, leads e finanças",
+  generator: "v0.app",
+}
 
-  return <>{children}</>
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="pt-BR" suppressHydrationWarning>
+      <head></head>
+      <body className={`font-sans antialiased`}>
+        {children}
+        <Analytics />
+      </body>
+    </html>
+  )
 }

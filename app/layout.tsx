@@ -1,33 +1,17 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Montserrat, Poppins } from "next/font/google"
+import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
-import { Suspense } from "react"
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
-  display: "swap",
-})
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
-  display: "swap",
-})
+const _geist = Geist({ subsets: ["latin"] })
+const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "VEXIS - Tecnologia que Converte",
-  description:
-    "Desenvolvemos soluções digitais para escalar seu negócio com confiança. Analytics, E-commerce, Landing Pages, Sites Institucionais e Tráfego Pago.",
-  generator: "VEXIS",
-  icons: {
-    icon: "/logo.jpeg",
-    shortcut: "/logo.jpeg",
-    apple: "/logo.jpeg",
-  },
+  title: "Vexis - Soluções Tecnológicas Inovadoras",
+  description: "Transformando ideias em realidade digital com excelência e inovação",
+  generator: "v0.app",
 }
 
 export default function RootLayout({
@@ -36,12 +20,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${montserrat.variable} ${poppins.variable} font-sans antialiased`}>
-        <Suspense>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className={`font-sans antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
-          <Analytics />
-        </Suspense>
+        </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
