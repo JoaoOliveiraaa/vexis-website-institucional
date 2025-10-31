@@ -105,7 +105,7 @@ export function TaskForm({ users, projects, currentUserId, task, assignedUsers =
         }
       }
 
-      router.push("/tarefas/tarefas/tasks")
+      router.push("/tarefas/tasks")
       router.refresh()
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "Erro ao salvar tarefa")

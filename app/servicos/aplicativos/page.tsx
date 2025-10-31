@@ -39,12 +39,12 @@ export default function AplicativosPage() {
           <section className="mb-20">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl font-bold mb-6 text-center">Aplicativos que Transformam Negócios</h2>
-              <p className="text-lg text-muted-foreground mb-4 leading-relaxed text-center">
+              <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
                 Aplicativos mobile e web são ferramentas poderosas para conectar sua empresa aos clientes de forma
                 direta e personalizada. Seja para iOS, Android ou web, um app bem desenvolvido oferece experiências
                 únicas, aumenta o engajamento e abre novos canais de receita.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed text-center">
+              <p className="text-lg text-muted-foreground leading-relaxed">
                 Na Vexis, desenvolvemos aplicativos personalizados usando as tecnologias mais modernas do mercado, como
                 React Native para apps nativos e Progressive Web Apps (PWA) para experiências web que funcionam como
                 apps. Transformamos sua visão em um produto digital de alta qualidade.
@@ -150,7 +150,7 @@ export default function AplicativosPage() {
           <section className="mb-20">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl font-bold mb-12 text-center">O que está incluído</h2>
-              <div className="space-y-4 mx-auto">
+              <div className="space-y-4">
                 {[
                   "Análise e planejamento completo do projeto",
                   "Design de interface (UI) e experiência do usuário (UX)",

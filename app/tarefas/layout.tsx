@@ -1,30 +1,30 @@
 import type React from "react"
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import "./globals.css"
+import { redirect } from "next/navigation"
+import { createClient } from "@/lib/supabase/server"
+import { DashboardNav } from "@/components/dashboard-nav"
+import { DashboardHeader } from "@/components/dashboard-header"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+export default async function TarefasLayout({ children }: { children: React.ReactNode }) {
+  const supabase = await createClient()
 
-export const metadata: Metadata = {
-  title: "Vexis - Sistema de Gestão Interna",
-  description: "Sistema de gerenciamento interno da Vexis para tarefas, projetos, leads e finanças",
-  generator: "v0.app",
-}
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+  if (!user) {
+    redirect("/auth/login")
+  }
+
+  // Get user profile
+  const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
+
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
-      <head></head>
-      <body className={`font-sans antialiased`}>
-        {children}
-        <Analytics />
-      </body>
-    </html>
+    <div className="flex min-h-screen bg-background">
+      <DashboardNav userRole={profile?.role || "user"} />
+      <div className="flex-1 flex flex-col">
+        <DashboardHeader user={user} profile={profile} />
+        <main className="flex-1 p-4 lg:p-6 bg-background">{children}</main>
+      </div>
+    </div>
   )
 }

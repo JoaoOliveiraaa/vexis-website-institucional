@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Github, Linkedin, Instagram, Facebook, MessageCircle } from "lucide-react"
+import { Github, Linkedin, Twitter, MessageCircle } from "lucide-react"
 import Link from "next/link"
 
 export function Footer() {
@@ -178,7 +178,7 @@ export function Footer() {
                   href="#"
                   className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <Instagram className="h-4 w-4" />
+                  <Github className="h-4 w-4" />
                 </a>
                 <a
                   href="#"
@@ -190,7 +190,7 @@ export function Footer() {
                   href="#"
                   className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <Facebook className="h-4 w-4" />
+                  <Twitter className="h-4 w-4" />
                 </a>
               </div>
             </div>

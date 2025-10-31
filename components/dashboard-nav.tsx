@@ -32,32 +32,32 @@ export function DashboardNav({ userRole }: DashboardNavProps) {
     },
     {
       title: "Tarefas",
-      href: "/tarefas/tarefas/tasks",
+      href: "/tarefas/tasks",
       icon: CheckSquare,
     },
     {
       title: "Projetos",
-      href: "/tarefas/tarefas/projects",
+      href: "/tarefas/projects",
       icon: FolderKanban,
     },
     {
       title: "Leads",
-      href: "/tarefas/tarefas/leads",
+      href: "/tarefas/leads",
       icon: Users,
     },
     {
       title: "Clientes",
-      href: "/tarefas/tarefas/clients",
+      href: "/tarefas/clients",
       icon: Building2,
     },
     {
       title: "Financeiro",
-      href: "/tarefas/tarefas/financial",
+      href: "/tarefas/financial",
       icon: DollarSign,
     },
     {
       title: "Relatórios",
-      href: "/tarefas/tarefas/reports",
+      href: "/tarefas/reports",
       icon: BarChart3,
     },
   ]
@@ -65,17 +65,17 @@ export function DashboardNav({ userRole }: DashboardNavProps) {
   const adminItems = [
     {
       title: "Integrações",
-      href: "/tarefas/tarefas/integrations",
+      href: "/tarefas/integrations",
       icon: Plug,
     },
     {
       title: "Usuários",
-      href: "/tarefas/tarefas/users",
+      href: "/tarefas/users",
       icon: UserCog,
     },
     {
       title: "Configurações",
-      href: "/tarefas/tarefas/settings",
+      href: "/tarefas/settings",
       icon: Settings,
     },
   ]
