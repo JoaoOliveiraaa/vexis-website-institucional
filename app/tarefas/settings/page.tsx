@@ -1,13 +1,14 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { SettingsForm } from "@/components/settings-form"
-import { PasswordChangeForm } from "@/components/password-change-form"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ProfileSection } from "@/components/profile-section"
+import { SecuritySection } from "@/components/security-section"
+import { NotificationsSection } from "@/components/notifications-section"
+import { PreferencesSection } from "@/components/preferences-section"
 
 export default async function SettingsPage() {
   const supabase = await createClient()
 
-  // Check if user is authenticated
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -16,39 +17,54 @@ export default async function SettingsPage() {
     redirect("/auth/login")
   }
 
-  // Fetch user profile
   const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
 
   if (!profile) {
     redirect("/auth/login")
   }
 
+  // Buscar preferências do usuário
+  const { data: preferences } = await supabase.from("user_preferences").select("*").eq("user_id", user.id).single()
+
+  // Buscar histórico de login (últimos 10)
+  const { data: loginHistory } = await supabase
+    .from("login_history")
+    .select("*")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false })
+    .limit(10)
+
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Configurações</h1>
-        <p className="text-muted-foreground">Gerencie suas informações pessoais e preferências</p>
+        <p className="text-muted-foreground">Gerencie suas informações pessoais, segurança e preferências</p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Informações Pessoais</CardTitle>
-          <CardDescription>Atualize seu nome e informações de perfil</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <SettingsForm profile={profile} />
-        </CardContent>
-      </Card>
+      <Tabs defaultValue="profile" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4">
+          <TabsTrigger value="profile">Perfil</TabsTrigger>
+          <TabsTrigger value="security">Segurança</TabsTrigger>
+          <TabsTrigger value="notifications">Notificações</TabsTrigger>
+          <TabsTrigger value="preferences">Preferências</TabsTrigger>
+        </TabsList>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Alterar Senha</CardTitle>
-          <CardDescription>Atualize sua senha de acesso</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <PasswordChangeForm />
-        </CardContent>
-      </Card>
+        <TabsContent value="profile" className="space-y-6">
+          <ProfileSection profile={profile} />
+        </TabsContent>
+
+        <TabsContent value="security" className="space-y-6">
+          <SecuritySection loginHistory={loginHistory || []} />
+        </TabsContent>
+
+        <TabsContent value="notifications" className="space-y-6">
+          <NotificationsSection preferences={preferences} userId={user.id} />
+        </TabsContent>
+
+        <TabsContent value="preferences" className="space-y-6">
+          <PreferencesSection preferences={preferences} userId={user.id} />
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
