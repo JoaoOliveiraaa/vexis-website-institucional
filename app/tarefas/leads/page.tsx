@@ -84,7 +84,7 @@ export default async function LeadsPage() {
             <CardTitle className="text-sm font-medium text-muted-foreground">Leads Ganhos</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-accent-foreground">
+            <div className="text-2xl font-bold text-foreground">
               R$ {wonValue.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
             </div>
           </CardContent>
