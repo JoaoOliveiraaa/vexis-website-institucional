@@ -2,8 +2,8 @@ import { createClient } from "@/lib/supabase/server"
 import { LeadForm } from "@/components/lead-form"
 import { notFound, redirect } from "next/navigation"
 
-export default async function EditLeadPage({ params }: { params: { id: string } }) {
-  const { id } = params
+export default async function EditLeadPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const supabase = await createClient()
 
   const {
