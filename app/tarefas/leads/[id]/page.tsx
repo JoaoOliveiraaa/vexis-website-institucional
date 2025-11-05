@@ -29,7 +29,7 @@ const statusLabels = {
 }
 
 export default async function LeadDetailPage({ params }: { params: { id: string } }) {
-  const { id } = params
+  const { id } = await params
 
   if (id === "new") {
     redirect("/tarefas/leads/new")
