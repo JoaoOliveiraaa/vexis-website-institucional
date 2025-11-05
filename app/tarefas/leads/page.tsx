@@ -29,16 +29,27 @@ const statusLabels = {
 export default async function LeadsPage() {
   const supabase = await createClient()
 
-  const { data: leads } = await supabase
-    .from("leads")
-    .select(
-      `
-      *,
-      assigned_to_profile:profiles!leads_assigned_to_fkey(id, full_name),
-      created_by_profile:profiles!leads_created_by_fkey(id, full_name)
-    `,
-    )
-    .order("created_at", { ascending: false })
+  let leads: any[] | null = null
+  try {
+    const { data, error } = await supabase
+      .from("leads")
+      .select(
+        `
+        *,
+        assigned_to_profile:profiles!leads_assigned_to_fkey(id, full_name),
+        created_by_profile:profiles!leads_created_by_fkey(id, full_name)
+      `,
+      )
+      .order("created_at", { ascending: false })
+
+    if (error) {
+      console.error("[LeadsPage] Error fetching leads:", error)
+    }
+    leads = data || []
+  } catch (err) {
+    console.error("[LeadsPage] Exception fetching leads:", err)
+    leads = []
+  }
 
   // Calculate stats
   const totalValue = leads?.reduce((sum, lead) => sum + (Number(lead.value) || 0), 0) || 0
@@ -102,7 +113,7 @@ export default async function LeadsPage() {
                       <AvatarFallback className="bg-muted">
                         {lead.name
                           .split(" ")
-                          .map((n) => n[0])
+                          .map((n: string) => n[0])
                           .join("")
                           .toUpperCase()
                           .slice(0, 2)}
@@ -143,7 +154,7 @@ export default async function LeadsPage() {
                       <AvatarFallback className="text-xs bg-muted">
                         {lead.assigned_to_profile.full_name
                           .split(" ")
-                          .map((n) => n[0])
+                          .map((n: string) => n[0])
                           .join("")
                           .toUpperCase()
                           .slice(0, 2)}
