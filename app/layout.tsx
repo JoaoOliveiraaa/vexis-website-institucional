@@ -11,7 +11,10 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Vexis - Soluções Tecnológicas Inovadoras",
   description: "Transformando ideias em realidade digital com excelência e inovação",
-  generator: "v0.app",
+  generator: "Vexis",
+  icons: {
+    icon: "/favicon.png", 
+  },
 }
 
 export default function RootLayout({
