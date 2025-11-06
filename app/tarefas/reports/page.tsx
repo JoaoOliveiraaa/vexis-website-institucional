@@ -31,8 +31,8 @@ export default async function ReportsPage() {
   // Fetch tasks data
   const { data: tasks } = await supabase.from("tasks").select("*")
 
-  const completedTasks = tasks?.filter((t) => t.status === "concluido").length || 0
-  const pendingTasks = tasks?.filter((t) => t.status !== "concluido" && t.status !== "cancelado").length || 0
+  const completedTasks = tasks?.filter((t) => t.status === "done").length || 0
+  const pendingTasks = tasks?.filter((t) => t.status !== "done" && t.status !== "cancelado").length || 0
 
   // Fetch clients data
   const { data: clients } = await supabase.from("clients").select("*")
