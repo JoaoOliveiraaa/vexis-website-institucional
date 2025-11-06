@@ -24,14 +24,9 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
   }
 
   // Fetch client details
-  const { data: client, error: clientError } = await supabase
+    const { data: client, error: clientError } = await supabase
     .from("clients")
-    .select(
-      `
-      *,
-      created_by_profile:profiles!clients_created_by_fkey(full_name)
-    `,
-    )
+    .select("*")
     .eq("id", id)
     .single()
 
