@@ -89,7 +89,7 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%281%29-aZKUuk3OiMU7MAzSUoz5qteYCRiGzU.png"
+              src="/logo.png"
               alt="Vexis Logo"
               width={40}
               height={40}
