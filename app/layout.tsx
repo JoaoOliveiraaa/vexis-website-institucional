@@ -9,7 +9,7 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Vexis - Soluções Tecnológicas Inovadoras",
+  title: "Vexis",
   description: "Transformando ideias em realidade digital com excelência e inovação",
   generator: "Vexis",
   icons: {
