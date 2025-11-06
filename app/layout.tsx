@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Transformando ideias em realidade digital com excelência e inovação",
   generator: "Vexis",
   icons: {
-    icon: "/favicon.png", 
+    icon: "/logo.png", 
   },
 }
 
