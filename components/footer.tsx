@@ -123,6 +123,16 @@ export function Footer() {
                   IA & Automação
                 </Link>
               </li>
+              <li>
+                <Link href="/trabalhe-conosco" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Trabalhe Conosco
+                </Link>
+              </li>
+              <li>
+                <Link href="/parceiros" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Parceiros
+                </Link>
+              </li>
             </ul>
           </div>
 
