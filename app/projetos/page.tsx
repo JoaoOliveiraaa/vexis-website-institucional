@@ -10,6 +10,24 @@ import Link from "next/link"
 
 const allProjects = [
   {
+    title: "Agende Beauty",
+    description: "Sistema completo de agendamento para salões de beleza com automação via WhatsApp e gestão integrada",
+    image: "/agendebeauty.png",
+    tags: ["Next.js", "N8N", "IA", "WhatsApp API"],
+    category: "Sistema + IA",
+    link: "/projetos/agende-beauty",
+    featured: true,
+  },
+  {
+    title: "Oficina System",
+    description: "Sistema de gestão para oficinas mecânicas com controle de estoque, ordens de serviço e automação",
+    image: "/oficinasystem.png",
+    tags: ["Next.js", "IA", "WhatsApp API", "Automação"],
+    category: "Sistema + IA",
+    link: "/projetos/oficina-system",
+    featured: true,
+  },
+  {
     title: "E-commerce Platform",
     description: "Plataforma completa de e-commerce com gestão de produtos, pagamentos e logística integrada",
     image: "/modern-ecommerce-dashboard.png",
@@ -132,10 +150,19 @@ export default function ProjectsPage() {
                       </span>
                     ))}
                   </div>
-                  <Button variant="ghost" className="w-full group mt-auto">
-                    Ver Detalhes
-                    <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
+                  {project.link ? (
+                    <Link href={project.link} className="w-full">
+                      <Button variant="ghost" className="w-full group mt-auto">
+                        Ver Detalhes
+                        <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Button variant="ghost" className="w-full group mt-auto" disabled>
+                      Ver Detalhes
+                      <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  )}
                 </div>
               </Card>
             ))}
