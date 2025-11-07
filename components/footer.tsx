@@ -13,7 +13,7 @@ export function Footer() {
           <div className="space-y-4 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%281%29-aZKUuk3OiMU7MAzSUoz5qteYCRiGzU.png"
+                src="/logo.png"
                 alt="Vexis Logo"
                 width={32}
                 height={32}

@@ -30,8 +30,8 @@ export function HeroSection() {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
+        vx: (Math.random() - 0.9) * 0.9,
+        vy: (Math.random() - 0.9) * 0.9,
         size: Math.random() * 2 + 1,
       })
     }
