@@ -114,8 +114,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/nossa-equipe" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Nossa Equipe
+                </Link>
+              </li>
+              <li>
                 <Link href="/projetos" className="text-muted-foreground hover:text-foreground transition-colors">
                   Projetos
+                </Link>
+              </li>
+              <li>
+                <Link href="/depoimentos" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Depoimentos
                 </Link>
               </li>
               <li>
@@ -137,16 +147,26 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Suporte</h3>
+            <h3 className="font-semibold mb-4">Recursos</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/contato" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Contato
+                <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/processo" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Como Trabalhamos
                 </Link>
               </li>
               <li>
                 <Link href="/faq" className="text-muted-foreground hover:text-foreground transition-colors">
                   FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/contato" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Contato
                 </Link>
               </li>
               <li>
@@ -208,9 +228,20 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border/40">
-          <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Vexis. Todos os direitos reservados.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} Vexis. Todos os direitos reservados.
+            </p>
+            <div className="flex gap-4 text-xs text-muted-foreground">
+              <Link href="/politica-privacidade" className="hover:text-foreground transition-colors">
+                Política de Privacidade
+              </Link>
+              <span>•</span>
+              <Link href="/termos-uso" className="hover:text-foreground transition-colors">
+                Termos de Uso
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
