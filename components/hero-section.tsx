@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { useEffect, useRef } from "react"
-import { SplineScene } from "./spline-scene"
+// import { SplineScene } from "./spline-scene"
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -63,10 +63,10 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-30" />
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-          {/* Left content - Text */}
-          <div className="flex-1 space-y-8 animate-fade-in-up text-center lg:text-left">
+      <div className="container max-w-4xl mx-auto relative z-10 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center text-center">
+          {/* Main content - Text */}
+          <div className="space-y-8 animate-fade-in-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
               <Sparkles className="h-4 w-4" />
               Inovação em Tecnologia
@@ -78,12 +78,12 @@ export function HeroSection() {
               em realidade digital
             </h1>
 
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl text-pretty leading-relaxed lg:mx-0 mx-auto">
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl text-pretty leading-relaxed mx-auto">
               Desenvolvemos soluções tecnológicas inovadoras que impulsionam o crescimento do seu negócio com excelência e
               criatividade
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center lg:items-start lg:justify-start justify-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Button size="lg" className="group">
                 Começar Agora
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -104,7 +104,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      <div className="max-w-4xl mx-auto absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
     </section>
   )
 }
