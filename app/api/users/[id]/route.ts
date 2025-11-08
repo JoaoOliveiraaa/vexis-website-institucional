@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server"
 import { createClient } from "@/lib/supabase/server"
-import { authenticateUser, errorResponse, successResponse, isAdmin } from "@/lib/api/auth"
+import { authenticateUser, errorResponse, successResponse, requireAdmin } from "@/lib/api/auth"
 import { updateUserSchema, validateData } from "@/lib/api/validation"
 import { readRateLimit, apiRateLimit } from "@/lib/api/rate-limit"
 import { sanitizeObject, validatePayloadSize, sanitizeUuid } from "@/lib/api/sanitize"
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     sanitizeUuid(id)
     
     // Users can view their own profile or admin can view any profile
-    if (userOrError.id !== id && !isAdmin(userOrError)) {
+    if (userOrError.id !== id && !requireAdmin(userOrError)) {
       await logFailure(userOrError.id, "read", "profiles", "Sem permissão", { targetUserId: id }, request)
       return applySecurityHeaders(errorResponse("Sem permissão para visualizar este perfil", 403), true)
     }
@@ -69,7 +69,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     sanitizeUuid(id)
 
     // Users can update their own profile or admin can update any profile
-    if (userOrError.id !== id && !isAdmin(userOrError)) {
+    if (userOrError.id !== id && !requireAdmin(userOrError)) {
       await logFailure(userOrError.id, "update", "profiles", "Sem permissão", { targetUserId: id }, request)
       return applySecurityHeaders(errorResponse("Sem permissão para modificar este perfil", 403), true)
     }
@@ -80,7 +80,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     const sanitizedBody = sanitizeObject(body)
     
     // Only admins can change roles
-    if (sanitizedBody.role && !isAdmin(userOrError)) {
+    if (sanitizedBody.role && !requireAdmin(userOrError)) {
       await logFailure(userOrError.id, "update", "profiles", "Tentativa de alterar role sem permissão", { 
         targetUserId: id,
         attemptedRole: sanitizedBody.role 
@@ -150,7 +150,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     sanitizeUuid(id)
     
     // Only admins can delete user profiles
-    if (!isAdmin(userOrError)) {
+    if (!requireAdmin(userOrError)) {
       await logFailure(userOrError.id, "delete", "profiles", "Sem permissão", { targetUserId: id }, request)
       return applySecurityHeaders(errorResponse("Sem permissão para deletar perfis", 403), true)
     }
