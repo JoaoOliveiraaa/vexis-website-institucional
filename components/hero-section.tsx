@@ -2,35 +2,22 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles } from "lucide-react"
-import dynamic from "next/dynamic"
-import { useEffect, useRef, useState } from "react"
-
-const SplineScene = dynamic(() => import("./spline-scene").then(mod => mod.SplineScene), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg">
-      <div className="animate-pulse text-muted-foreground">Carregando...</div>
-    </div>
-  ),
-})
+import { useEffect, useRef } from "react"
+import { SplineScene } from "./spline-scene"
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-  const animationRef = useRef<number>()
 
   useEffect(() => {
-    setIsVisible(true)
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const ctx = canvas.getContext("2d", { alpha: true })
+    const ctx = canvas.getContext("2d")
     if (!ctx) return
 
     canvas.width = canvas.offsetWidth
     canvas.height = canvas.offsetHeight
 
-    // Reduzir partículas de 50 para 25
     const particles: Array<{
       x: number
       y: number
@@ -39,59 +26,42 @@ export function HeroSection() {
       size: number
     }> = []
 
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 50; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 1.5 + 0.5,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1,
       })
     }
 
-    let lastTime = 0
-    const fps = 30 // Limitar FPS
-    const fpsInterval = 1000 / fps
-
-    function animate(currentTime: number) {
+    function animate() {
       if (!ctx || !canvas) return
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      const elapsed = currentTime - lastTime
+      particles.forEach((particle) => {
+        particle.x += particle.vx
+        particle.y += particle.vy
 
-      if (elapsed > fpsInterval) {
-        lastTime = currentTime - (elapsed % fpsInterval)
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.beginPath()
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
+        ctx.fillStyle = "rgba(139, 92, 246, 0.3)"
+        ctx.fill()
+      })
 
-        particles.forEach((particle) => {
-          particle.x += particle.vx
-          particle.y += particle.vy
-
-          if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1
-          if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1
-
-          ctx.beginPath()
-          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-          ctx.fillStyle = "rgba(139, 92, 246, 0.25)"
-          ctx.fill()
-        })
-      }
-
-      animationRef.current = requestAnimationFrame(animate)
+      requestAnimationFrame(animate)
     }
 
-    animationRef.current = requestAnimationFrame(animate)
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
-    }
+    animate()
   }, [])
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-20" />
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-30" />
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -124,14 +94,12 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right content - Spline Robot com lazy loading */}
+          {/* Right content - Spline Robot */}
           <div className="flex-1 relative w-full h-[400px] lg:h-[600px]">
-            {isVisible && (
-              <SplineScene
-                scene="https://prod.spline.design/UbM7F-HZcyTbZ4y3/scene.splinecode"
-                className="w-full h-full"
-              />
-            )}
+            <SplineScene
+              scene="https://prod.spline.design/UbM7F-HZcyTbZ4y3/scene.splinecode"
+              className="w-full h-full"
+            />
           </div>
         </div>
       </div>

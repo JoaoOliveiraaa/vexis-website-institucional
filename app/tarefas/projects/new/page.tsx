@@ -2,8 +2,6 @@ import { createClient } from "@/lib/supabase/server"
 import { ProjectForm } from "@/components/project-form"
 import { redirect } from "next/navigation"
 
-export const dynamic = 'force-dynamic'
-
 export default async function NewProjectPage() {
   console.log("[SERVER][v0] NewProjectPage - Starting")
 

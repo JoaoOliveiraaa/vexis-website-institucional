@@ -2,8 +2,6 @@ import { createClient } from "@/lib/supabase/server"
 import { LeadForm } from "@/components/lead-form"
 import { redirect } from "next/navigation"
 
-export const dynamic = 'force-dynamic'
-
 export default async function NewLeadPage() {
   console.log("[SERVER][v0] NewLeadPage - Starting")
 

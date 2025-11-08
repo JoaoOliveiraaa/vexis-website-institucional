@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ExternalLink } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
 
 const projects = [
   {
@@ -47,14 +46,10 @@ export function ProjectsSection() {
               className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-border/50"
             >
               <div className="aspect-video relative overflow-hidden bg-muted">
-                <Image
+                <img
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-300 hover:scale-105"
-                  loading="lazy"
-                  quality={85}
+                  className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
                 />
               </div>
               <div className="p-6 space-y-4">
