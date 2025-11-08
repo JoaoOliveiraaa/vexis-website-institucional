@@ -172,40 +172,31 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <SheetHeader>
-                  <SheetTitle className="flex items-center gap-2">
-                    <Image
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%281%29-aZKUuk3OiMU7MAzSUoz5qteYCRiGzU.png"
-                      alt="Vexis Logo"
-                      width={32}
-                      height={32}
-                      className="h-8 w-auto"
-                    />
-                    <span className="text-lg font-semibold">Vexis</span>
-                  </SheetTitle>
+                <SheetHeader className="mb-6">
+                  <SheetTitle className="text-lg font-semibold">Menu</SheetTitle>
                 </SheetHeader>
-                <nav className="flex flex-col gap-4 mt-8">
+                <nav className="flex flex-col gap-2">
                   <Link
                     href="/#sobre"
                     onClick={(e) => handleNavigation(e, "#sobre")}
-                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors px-4 py-3 rounded-md hover:bg-accent"
                   >
                     Sobre
                   </Link>
 
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="services" className="border-none">
-                      <AccordionTrigger className="text-base font-medium text-muted-foreground hover:text-foreground py-2 hover:no-underline">
+                      <AccordionTrigger className="text-base font-medium text-muted-foreground hover:text-foreground px-4 py-3 hover:no-underline hover:bg-accent rounded-md">
                         Serviços
                       </AccordionTrigger>
-                      <AccordionContent>
-                        <div className="flex flex-col gap-2 pl-4">
+                      <AccordionContent className="pb-0">
+                        <div className="flex flex-col gap-1 pl-4 mt-2">
                           {services.map((service, index) => (
                             <Link
                               key={index}
                               href={service.href}
                               onClick={() => setMobileMenuOpen(false)}
-                              className="flex flex-col gap-1 py-2 text-sm hover:text-foreground transition-colors"
+                              className="flex flex-col gap-1 py-3 px-4 text-sm hover:text-foreground transition-colors rounded-md hover:bg-accent"
                             >
                               <div className="font-medium">{service.title}</div>
                               <div className="text-xs text-muted-foreground leading-relaxed">{service.description}</div>
@@ -219,7 +210,7 @@ export function Header() {
                   <Link
                     href="/automacao-ia"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-2 py-2 px-3 rounded-md bg-gradient-to-r from-purple-500/10 via-violet-500/10 to-cyan-500/10 dark:from-purple-500/20 dark:via-violet-500/20 dark:to-cyan-500/20 border border-purple-500/20 dark:border-purple-500/30"
+                    className="flex items-center gap-2 mx-4 my-2 py-3 px-4 rounded-md bg-gradient-to-r from-purple-500/10 via-violet-500/10 to-cyan-500/10 dark:from-purple-500/20 dark:via-violet-500/20 dark:to-cyan-500/20 border border-purple-500/20 dark:border-purple-500/30"
                   >
                     <Sparkles className="h-4 w-4 text-purple-600 dark:text-purple-400" />
                     <span className="bg-gradient-to-r from-purple-600 via-violet-600 to-cyan-600 dark:from-purple-400 dark:via-violet-400 dark:to-cyan-400 bg-clip-text text-transparent font-semibold">
@@ -230,7 +221,7 @@ export function Header() {
                   <Link
                     href="/projetos"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors px-4 py-3 rounded-md hover:bg-accent"
                   >
                     Projetos
                   </Link>
@@ -238,12 +229,12 @@ export function Header() {
                   <Link
                     href="/#contato"
                     onClick={(e) => handleNavigation(e, "#contato")}
-                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors px-4 py-3 rounded-md hover:bg-accent"
                   >
                     Contato
                   </Link>
 
-                  <Button className="mt-4 w-full" asChild>
+                  <Button className="mt-6 mx-4 w-auto" asChild>
                     <Link href="/#contato" onClick={(e) => handleNavigation(e, "#contato")}>
                       Fale Conosco
                     </Link>
