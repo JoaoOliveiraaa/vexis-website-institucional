@@ -19,6 +19,17 @@ const equipe = [
     email: "joao@vexis.com.br"
   },
   {
+    nome: "Luísa Garbelini",
+    cargo: "CTO & CoFounder",
+    especialidade: "Desenvolvedora Full-Stack & IA",
+    foto: "/placeholder-user.jpg",
+    bio: "Cofundadora da Vexis com sólida expertise em desenvolvimento full-stack e inteligência artificial. Especialista em criar arquiteturas escaláveis e soluções de Machine Learning que transformam dados em insights acionáveis.",
+    habilidades: ["Python", "Machine Learning", "Java", "React", "Node.js", "TensorFlow", "API Rest", "PostgreSQL"],
+    linkedin: "#",
+    github: "#",
+    email: "luisa@vexis.com.br"
+  },
+  {
     nome: "Luigi Falconi",
     cargo: "CTO & CoFounder",
     especialidade: "Marketing & Desenvolvimento",
