@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server"
 import { TaskForm } from "@/components/task-form"
 import { redirect } from "next/navigation"
 
+export const dynamic = 'force-dynamic'
+
 export default async function NewTaskPage() {
   console.log("[v0] NewTaskPage - Starting")
 

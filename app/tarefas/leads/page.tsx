@@ -6,6 +6,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Plus, Mail, Phone, DollarSign } from "lucide-react"
 import Link from "next/link"
 
+export const dynamic = 'force-dynamic'
+
 const statusColors = {
   new: "bg-blue-200 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
   contacted: "bg-purple-200 text-purple-700 dark:bg-purple-900 dark:text-purple-300",

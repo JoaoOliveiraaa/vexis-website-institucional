@@ -7,6 +7,8 @@ import { ClientsTable } from "@/components/clients-table"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
+export const dynamic = 'force-dynamic'
+
 export default async function ClientsPage() {
   const supabase = await createClient()
 
@@ -228,3 +230,4 @@ function PaymentsTable({ payments }: { payments: any[] }) {
     </div>
   )
 }
+

@@ -7,6 +7,8 @@ import { ApiKeysSection } from "@/components/api-keys-section"
 import { IntegrationsDocumentation } from "@/components/integrations-documentation"
 import { Webhook, Key, BookOpen, Zap } from "lucide-react"
 
+export const dynamic = 'force-dynamic'
+
 export default async function IntegrationsPage() {
   const supabase = await createClient()
   const {
@@ -117,3 +119,4 @@ export default async function IntegrationsPage() {
     </div>
   )
 }
+

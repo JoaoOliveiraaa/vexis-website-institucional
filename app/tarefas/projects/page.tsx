@@ -6,6 +6,8 @@ import { Progress } from "@/components/ui/progress"
 import { Plus, Calendar, DollarSign } from "lucide-react"
 import Link from "next/link"
 
+export const dynamic = 'force-dynamic'
+
 const statusColors = {
   planning: "bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-300",
   active: "bg-green-200 text-green-700 dark:bg-green-900 dark:text-green-300",
@@ -115,3 +117,4 @@ export default async function ProjectsPage() {
     </div>
   )
 }
+

@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server"
 import { FinancialRecordForm } from "@/components/financial-record-form"
 import { redirect } from "next/navigation"
 
+export const dynamic = 'force-dynamic'
+
 export default async function NewFinancialRecordPage() {
   const supabase = await createClient()
 
@@ -26,3 +28,4 @@ export default async function NewFinancialRecordPage() {
     </div>
   )
 }
+

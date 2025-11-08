@@ -5,6 +5,8 @@ import { TasksStatusChart, RevenueChart, LeadsStatusChart } from "@/components/d
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 
+export const dynamic = 'force-dynamic'
+
 export default async function DashboardPage() {
   const supabase = await createClient()
 
@@ -273,3 +275,4 @@ export default async function DashboardPage() {
     </div>
   )
 }
+

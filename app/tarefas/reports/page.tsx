@@ -5,6 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ReportsCharts } from "@/components/reports-charts"
 import { TrendingUp, TrendingDown, DollarSign, Users, CheckCircle2, Clock } from "lucide-react"
 
+export const dynamic = 'force-dynamic'
+
 export default async function ReportsPage() {
   const supabase = await createClient()
 
@@ -164,3 +166,4 @@ export default async function ReportsPage() {
     </div>
   )
 }
+

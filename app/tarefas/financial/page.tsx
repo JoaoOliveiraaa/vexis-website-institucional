@@ -6,6 +6,8 @@ import Link from "next/link"
 import { FinancialChart } from "@/components/financial-chart"
 import { FinancialTable } from "@/components/financial-table"
 
+export const dynamic = 'force-dynamic'
+
 export default async function FinancialPage() {
   const supabase = await createClient()
 
@@ -115,3 +117,4 @@ export default async function FinancialPage() {
     </div>
   )
 }
+

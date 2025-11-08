@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { ClientForm } from "@/components/client-form"
 
+export const dynamic = 'force-dynamic'
+
 export default async function NewClientPage() {
   console.log("[v0] NewClientPage - Starting to render")
 
@@ -41,3 +43,4 @@ export default async function NewClientPage() {
     redirect("/auth/login")
   }
 }
+
