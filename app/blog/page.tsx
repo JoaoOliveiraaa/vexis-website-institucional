@@ -15,7 +15,7 @@ const posts = [
     autor: "João Silva",
     data: "15 Nov 2024",
     tempoLeitura: "8 min",
-    imagem: "/blog/ia-automacao-negocio.jpg",
+    imagem: "/blog/ia-automacao-negocio-convertido-de-jpg.webp",
     destaque: true
   },
   {
@@ -26,7 +26,7 @@ const posts = [
     autor: "Maria Santos",
     data: "12 Nov 2024",
     tempoLeitura: "6 min",
-    imagem: "/blog/nextjs-14-novidades.jpg",
+    imagem: "/blog/nextjs-14-novidades-convertido-de-jpg.webp",
     destaque: false
   },
   {
@@ -37,7 +37,7 @@ const posts = [
     autor: "Ana Costa",
     data: "10 Nov 2024",
     tempoLeitura: "10 min",
-    imagem: "/blog/design-system-empresarial.jpg",
+    imagem: "/blog/design-system-empresarial-convertido-de-jpg.webp",
     destaque: false
   },
   {
@@ -48,7 +48,7 @@ const posts = [
     autor: "Carlos Mendes",
     data: "8 Nov 2024",
     tempoLeitura: "7 min",
-    imagem: "/blog/n8n-automacao-workflows.webp",
+    imagem: "/blog/n8n-automacao-workflows-convertido-de-webp.webp",
     destaque: false
   },
   {
@@ -59,7 +59,7 @@ const posts = [
     autor: "Pedro Oliveira",
     data: "5 Nov 2024",
     tempoLeitura: "12 min",
-    imagem: "/blog/seo-desenvolvedores.jpg",
+    imagem: "/blog/seo-desenvolvedores-convertido-de-jpg.webp",
     destaque: false
   },
   {
@@ -70,7 +70,7 @@ const posts = [
     autor: "Maria Santos",
     data: "1 Nov 2024",
     tempoLeitura: "15 min",
-    imagem: "/blog/typescript-iniciantes.jpg",
+    imagem: "/blog/typescript-iniciantes-convertido-de-jpg.webp",
     destaque: false
   }
 ]
