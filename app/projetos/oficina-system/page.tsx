@@ -77,7 +77,7 @@ export default function OficinaSystemPage() {
 
             <div className="aspect-video relative overflow-hidden rounded-lg bg-muted border">
               <img
-                src="/oficinasystem.png"
+                src="/oficinasystem.webp"
                 alt="Oficina System Dashboard"
                 className="object-cover w-full h-full"
               />

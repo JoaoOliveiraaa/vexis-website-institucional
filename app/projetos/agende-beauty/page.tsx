@@ -76,7 +76,7 @@ export default function AgendeBeautyPage() {
 
             <div className="aspect-video relative overflow-hidden rounded-lg bg-muted border">
               <img
-                src="/agendebeauty.png"
+                src="/agendebeauty.webp"
                 alt="Agende Beauty Dashboard"
                 className="object-cover w-full h-full"
               />

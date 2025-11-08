@@ -9,19 +9,19 @@ const projects = [
   {
     title: "E-commerce Platform",
     description: "Plataforma completa de e-commerce com gestão de produtos, pagamentos e logística",
-    image: "/modern-ecommerce-dashboard.png",
+    image: "/modern-ecommerce-dashboard.webp",
     tags: ["Next.js", "TypeScript", "Stripe"],
   },
   {
     title: "Healthcare App",
     description: "Aplicativo de saúde para agendamento de consultas e telemedicina",
-    image: "/healthcare-mobile-app.jpg",
+    image: "/healthcare-mobile-app.webp",
     tags: ["React Native", "Node.js", "PostgreSQL"],
   },
   {
     title: "Analytics Dashboard",
     description: "Dashboard de analytics em tempo real com visualizações interativas",
-    image: "/analytics-dashboard-dark.jpg",
+    image: "/analytics-dashboard-dark.webp",
     tags: ["React", "D3.js", "WebSocket"],
   },
 ]

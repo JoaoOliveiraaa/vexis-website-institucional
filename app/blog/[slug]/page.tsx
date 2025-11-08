@@ -15,7 +15,7 @@ const postsData: Record<string, any> = {
     autor: "João Silva",
     data: "15 Nov 2024",
     tempoLeitura: "8 min",
-    imagem: "/blog/ia-automacao-negocio.jpg",
+    imagem: "/blog/ia-automacao-negocio-convertido-de-jpg.webp",
     conteudo: `
 A inteligência artificial deixou de ser ficção científica e se tornou uma ferramenta essencial para empresas de todos os tamanhos. Neste artigo, vamos explorar como você pode usar IA para automatizar processos e impulsionar seu negócio.
 
