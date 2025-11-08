@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import {
   AlertDialog,
@@ -20,13 +19,20 @@ import { Trash2 } from "lucide-react"
 export function DeleteLeadButton({ leadId }: { leadId: string }) {
   const [isDeleting, setIsDeleting] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
 
   const handleDelete = async () => {
     setIsDeleting(true)
     try {
-      const { error } = await supabase.from("leads").delete().eq("id", leadId)
-      if (error) throw error
+      const response = await fetch(`/api/leads/${leadId}`, {
+        method: "DELETE",
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || "Erro ao excluir lead")
+      }
+
       router.push("/tarefas/leads")
       router.refresh()
     } catch (error) {

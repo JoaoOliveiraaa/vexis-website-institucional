@@ -4,7 +4,6 @@ import type React from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -36,7 +35,6 @@ export function FinancialRecordForm({ projects, currentUserId, record }: Financi
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
-  const supabase = createClient()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -51,18 +49,23 @@ export function FinancialRecordForm({ projects, currentUserId, record }: Financi
         description: description || null,
         date: new Date(date).toISOString(),
         project_id: projectId === "none" ? null : projectId,
-        updated_at: new Date().toISOString(),
       }
 
-      if (record) {
-        const { error } = await supabase.from("financial_records").update(recordData).eq("id", record.id)
-        if (error) throw error
-      } else {
-        const { error } = await supabase.from("financial_records").insert({
-          ...recordData,
-          created_by: currentUserId,
-        })
-        if (error) throw error
+      const endpoint = record ? `/api/financial/${record.id}` : "/api/financial"
+      const method = record ? "PATCH" : "POST"
+
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(recordData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || "Erro ao salvar registro")
       }
 
       router.push("/tarefas/financial")

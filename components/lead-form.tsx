@@ -4,7 +4,6 @@ import type React from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -42,7 +41,6 @@ export function LeadForm({ users, currentUserId, lead }: LeadFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
-  const supabase = createClient()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -60,18 +58,23 @@ export function LeadForm({ users, currentUserId, lead }: LeadFormProps) {
         value: value ? Number.parseFloat(value) : null,
         notes: notes || null,
         assigned_to: assignedTo === "none" ? null : assignedTo,
-        updated_at: new Date().toISOString(),
       }
 
-      if (lead) {
-        const { error } = await supabase.from("leads").update(leadData).eq("id", lead.id)
-        if (error) throw error
-      } else {
-        const { error } = await supabase.from("leads").insert({
-          ...leadData,
-          created_by: currentUserId,
-        })
-        if (error) throw error
+      const endpoint = lead ? `/api/leads/${lead.id}` : "/api/leads"
+      const method = lead ? "PATCH" : "POST"
+
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(leadData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || "Erro ao salvar lead")
       }
 
       router.push("/tarefas/leads")

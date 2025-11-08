@@ -1,19 +1,48 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: 'swap',
+  preload: true,
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
-  title: "Vexis",
-  description: "Transformando ideias em realidade digital com excelência e inovação",
+  title: "Vexis | Desenvolvimento de Software e Soluções Digitais",
+  description: "Transformando ideias em realidade digital com excelência e inovação. Desenvolvimento web, apps mobile, sistemas personalizados e automação com IA.",
   generator: "Vexis",
+  keywords: ["desenvolvimento web", "apps mobile", "sistemas personalizados", "automação", "IA", "Next.js", "React"],
+  authors: [{ name: "Vexis" }],
   icons: {
-    icon: "/faviconwhite.png", 
+    icon: "/faviconwhite.png",
+    apple: "/faviconwhite.png",
+  },
+  openGraph: {
+    title: "Vexis | Desenvolvimento de Software e Soluções Digitais",
+    description: "Transformando ideias em realidade digital com excelência e inovação",
+    type: "website",
+    locale: "pt_BR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vexis | Desenvolvimento de Software",
+    description: "Transformando ideias em realidade digital",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
@@ -44,7 +73,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`font-sans antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>

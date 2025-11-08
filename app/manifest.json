@@ -1,0 +1,22 @@
+{
+  "name": "Vexis - Desenvolvimento de Software",
+  "short_name": "Vexis",
+  "description": "Transformando ideias em realidade digital",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#8B5CF6",
+  "icons": [
+    {
+      "src": "/faviconwhite.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/faviconwhite.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+

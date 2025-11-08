@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import {
   AlertDialog,
@@ -20,13 +19,20 @@ import { Trash2 } from "lucide-react"
 export function DeleteProjectButton({ projectId }: { projectId: string }) {
   const [isDeleting, setIsDeleting] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
 
   const handleDelete = async () => {
     setIsDeleting(true)
     try {
-      const { error } = await supabase.from("projects").delete().eq("id", projectId)
-      if (error) throw error
+      const response = await fetch(`/api/projects/${projectId}`, {
+        method: "DELETE",
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || "Erro ao excluir projeto")
+      }
+
       router.push("/tarefas/projects")
       router.refresh()
     } catch (error) {

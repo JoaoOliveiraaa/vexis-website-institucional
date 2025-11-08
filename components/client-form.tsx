@@ -10,7 +10,6 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent } from "@/components/ui/card"
-import { createClient } from "@/lib/supabase/client"
 
 interface ClientFormProps {
   client?: {
@@ -52,33 +51,27 @@ export function ClientForm({ client }: ClientFormProps) {
     e.preventDefault()
     setIsSubmitting(true)
 
-    const supabase = createClient()
-
     try {
-      if (client) {
-        // Update existing client
-        const { error } = await supabase
-          .from("clients")
-          .update({
-            ...formData,
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", client.id)
+      const endpoint = client ? `/api/clients/${client.id}` : "/api/clients"
+      const method = client ? "PATCH" : "POST"
 
-        if (error) throw error
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || "Erro ao salvar cliente")
+      }
+
+      if (client) {
         router.push(`/tarefas/clients/${client.id}`)
       } else {
-        // Create new client
-        const {
-          data: { user },
-        } = await supabase.auth.getUser()
-
-        const { error } = await supabase.from("clients").insert({
-          ...formData,
-          created_by: user?.id,
-        })
-
-        if (error) throw error
         router.push("/tarefas/clients")
       }
 

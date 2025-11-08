@@ -4,7 +4,6 @@ import type React from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -43,7 +42,6 @@ export function TaskForm({ users, projects, currentUserId, task, assignedUsers =
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
-  const supabase = createClient()
 
   const toggleUser = (userId: string) => {
     setSelectedUsers((prev) => (prev.includes(userId) ? prev.filter((id) => id !== userId) : [...prev, userId]))
@@ -64,45 +62,26 @@ export function TaskForm({ users, projects, currentUserId, task, assignedUsers =
         description: description || null,
         status,
         priority,
-        assigned_to: selectedUsers.length > 0 ? selectedUsers[0] : null, // Keep for backward compatibility
         project_id: projectId === "none" ? null : projectId,
         due_date: dueDate ? new Date(dueDate).toISOString() : null,
-        updated_at: new Date().toISOString(),
+        assigned_users: selectedUsers,
       }
 
-      let taskId = task?.id
+      const endpoint = task ? `/api/tasks/${task.id}` : "/api/tasks"
+      const method = task ? "PATCH" : "POST"
 
-      if (task) {
-        // Update existing task
-        const { error } = await supabase.from("tasks").update(taskData).eq("id", task.id)
-        if (error) throw error
-      } else {
-        // Create new task
-        const { data, error } = await supabase
-          .from("tasks")
-          .insert({
-            ...taskData,
-            created_by: currentUserId,
-          })
-          .select()
-          .single()
-        if (error) throw error
-        taskId = data.id
-      }
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(taskData),
+      })
 
-      if (taskId) {
-        // Delete existing assignees
-        await supabase.from("task_assignees").delete().eq("task_id", taskId)
+      const result = await response.json()
 
-        // Insert new assignees
-        if (selectedUsers.length > 0) {
-          const assignees = selectedUsers.map((userId) => ({
-            task_id: taskId,
-            user_id: userId,
-          }))
-          const { error: assignError } = await supabase.from("task_assignees").insert(assignees)
-          if (assignError) throw assignError
-        }
+      if (!response.ok) {
+        throw new Error(result.error || "Erro ao salvar tarefa")
       }
 
       router.push("/tarefas/tasks")

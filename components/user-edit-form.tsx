@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { createClient } from "@/lib/supabase/client"
 import { Loader2 } from "lucide-react"
 
 interface UserEditFormProps {
@@ -31,18 +30,22 @@ export function UserEditForm({ profile }: UserEditFormProps) {
     setLoading(true)
 
     try {
-      const supabase = createClient()
-
-      const { error } = await supabase
-        .from("profiles")
-        .update({
+      const response = await fetch(`/api/users/${profile.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           full_name: fullName,
           role: role,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", profile.id)
+        }),
+      })
 
-      if (error) throw error
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || "Erro ao atualizar usuário")
+      }
 
       router.push("/tarefas/users")
       router.refresh()

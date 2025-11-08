@@ -4,7 +4,6 @@ import type React from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -40,7 +39,6 @@ export function ProjectForm({ currentUserId, project }: ProjectFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
-  const supabase = createClient()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -57,18 +55,23 @@ export function ProjectForm({ currentUserId, project }: ProjectFormProps) {
         budget: budget ? Number.parseFloat(budget) : null,
         spent: spent ? Number.parseFloat(spent) : 0,
         progress: progress[0],
-        updated_at: new Date().toISOString(),
       }
 
-      if (project) {
-        const { error } = await supabase.from("projects").update(projectData).eq("id", project.id)
-        if (error) throw error
-      } else {
-        const { error } = await supabase.from("projects").insert({
-          ...projectData,
-          created_by: currentUserId,
-        })
-        if (error) throw error
+      const endpoint = project ? `/api/projects/${project.id}` : "/api/projects"
+      const method = project ? "PATCH" : "POST"
+
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(projectData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || "Erro ao salvar projeto")
       }
 
       router.push("/tarefas/projects")

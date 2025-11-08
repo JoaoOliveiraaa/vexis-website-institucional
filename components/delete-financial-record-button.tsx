@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import {
   AlertDialog,
@@ -20,13 +19,20 @@ import { Trash2 } from "lucide-react"
 export function DeleteFinancialRecordButton({ recordId }: { recordId: string }) {
   const [isDeleting, setIsDeleting] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
 
   const handleDelete = async () => {
     setIsDeleting(true)
     try {
-      const { error } = await supabase.from("financial_records").delete().eq("id", recordId)
-      if (error) throw error
+      const response = await fetch(`/api/financial/${recordId}`, {
+        method: "DELETE",
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || "Erro ao excluir registro")
+      }
+
       router.refresh()
     } catch (error) {
       console.error("Error deleting record:", error)
