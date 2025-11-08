@@ -94,13 +94,13 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right content - Spline Robot */}
+          {/* Right content - Spline Robot 
           <div className="flex-1 relative w-full h-[400px] lg:h-[600px]">
             <SplineScene
               scene="https://prod.spline.design/UbM7F-HZcyTbZ4y3/scene.splinecode"
               className="w-full h-full"
             />
-          </div>
+          </div>*/}
         </div>
       </div>
 
