@@ -16,6 +16,7 @@ interface SettingsFormProps {
     email: string
     full_name: string
     role: string
+    niche?: string | null
   }
 }
 
@@ -23,6 +24,7 @@ export function SettingsForm({ profile }: SettingsFormProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [fullName, setFullName] = useState(profile.full_name)
+  const [niche, setNiche] = useState(profile.niche ?? "")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -35,6 +37,7 @@ export function SettingsForm({ profile }: SettingsFormProps) {
         .from("profiles")
         .update({
           full_name: fullName,
+          niche: niche.trim() || null,
           updated_at: new Date().toISOString(),
         })
         .eq("id", profile.id)
@@ -62,6 +65,19 @@ export function SettingsForm({ profile }: SettingsFormProps) {
       <div className="space-y-2">
         <Label htmlFor="full_name">Nome Completo</Label>
         <Input id="full_name" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="niche">Nicho / Área de Atuação</Label>
+        <Input
+          id="niche"
+          value={niche}
+          onChange={(e) => setNiche(e.target.value)}
+          placeholder="Ex: Desenvolvimento, Marketing, Comercial..."
+        />
+        <p className="text-sm text-muted-foreground">
+          Use este campo para indicar em qual frente você atua dentro da equipe.
+        </p>
       </div>
 
       <div className="space-y-2">

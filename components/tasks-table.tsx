@@ -85,10 +85,10 @@ export function TasksTable({ tasks, taskAssignees = [] }: TasksTableProps) {
   }
 
   return (
-    <div className="rounded-lg border border-border bg-card overflow-x-auto">
-      <Table>
+    <div className="overflow-x-auto rounded-2xl">
+      <Table className="min-w-full border-separate border-spacing-y-2">
         <TableHeader>
-          <TableRow>
+          <TableRow className="rounded-2xl bg-muted/30 hover:bg-muted/40">
             <TableHead className="min-w-[150px]">Título</TableHead>
             <TableHead className="min-w-[120px]">Status</TableHead>
             <TableHead className="min-w-[100px]">Prioridade</TableHead>
@@ -99,8 +99,8 @@ export function TasksTable({ tasks, taskAssignees = [] }: TasksTableProps) {
         </TableHeader>
         <TableBody>
           {tasks.length === 0 ? (
-            <TableRow>
-              <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
+            <TableRow className="rounded-xl bg-card/80">
+              <TableCell colSpan={6} className="py-8 text-center text-muted-foreground">
                 Nenhuma tarefa encontrada
               </TableCell>
             </TableRow>
@@ -109,7 +109,10 @@ export function TasksTable({ tasks, taskAssignees = [] }: TasksTableProps) {
               const assignees = getTaskAssignees(task.id)
 
               return (
-                <TableRow key={task.id}>
+                <TableRow
+                  key={task.id}
+                  className="rounded-2xl border border-border/60 bg-card/95 shadow-sm transition hover:-translate-y-[1px] hover:bg-accent/5"
+                >
                   <TableCell className="font-medium">
                     <Link href={`/tarefas/tasks/${task.id}`} className="hover:underline">
                       {task.title}

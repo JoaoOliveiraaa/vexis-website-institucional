@@ -1,7 +1,14 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { useMemo } from "react"
 
 interface FinancialRecord {
@@ -41,37 +48,63 @@ export function FinancialChart({ records }: FinancialChartProps) {
     return Array.from(monthlyData.entries())
       .map(([month, data]) => ({
         month: new Date(month + "-01").toLocaleDateString("pt-BR", { month: "short", year: "numeric" }),
-        Receitas: data.income,
-        Despesas: data.expense,
+        income: data.income,
+        expense: data.expense,
       }))
       .sort((a, b) => a.month.localeCompare(b.month))
-      .slice(-6) // Last 6 months
+      .slice(-6)
   }, [records])
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Receitas vs Despesas (Últimos 6 Meses)</CardTitle>
+    <Card className="border border-border/60 bg-card/95 shadow-sm">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-base lg:text-lg text-card-foreground">
+          Receitas vs Despesas (Últimos 6 Meses)
+        </CardTitle>
+        <p className="text-sm text-muted-foreground">
+          Compare o fluxo financeiro mensal para ajustar investimentos e cortes.
+        </p>
       </CardHeader>
-      <CardContent>
-        <ResponsiveContainer width="100%" height={350}>
-          <BarChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" className="stroke-slate-200 dark:stroke-slate-800" />
-            <XAxis dataKey="month" className="text-xs" />
-            <YAxis className="text-xs" />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "hsl(var(--background))",
-                border: "1px solid hsl(var(--border))",
-                borderRadius: "8px",
-              }}
-              formatter={(value: number) => `R$ ${value.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`}
+      <CardContent className="pt-4">
+        <ChartContainer
+          id="financial-bar"
+          config={{
+            income: { label: "Receitas", color: "var(--primary)" },
+            expense: { label: "Despesas", color: "var(--accent)" },
+          }}
+          className="h-[320px] w-full"
+        >
+          <BarChart data={chartData} barGap={12}>
+            <defs>
+              <linearGradient id="financialIncome" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="var(--color-income)" stopOpacity={0.9} />
+                <stop offset="95%" stopColor="var(--color-income)" stopOpacity={0.2} />
+              </linearGradient>
+              <linearGradient id="financialExpense" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="var(--color-expense)" stopOpacity={0.9} />
+                <stop offset="95%" stopColor="var(--color-expense)" stopOpacity={0.2} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="4 4" className="stroke-border/60" />
+            <XAxis dataKey="month" tickLine={false} axisLine={false} />
+            <YAxis tickLine={false} axisLine={false} tickFormatter={(value) => `R$ ${value / 1000}k`} />
+            <ChartTooltip
+              content={
+                <ChartTooltipContent
+                  formatter={(value) => `R$ ${Number(value).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`}
+                  hideLabel
+                />
+              }
             />
-            <Legend />
-            <Bar dataKey="Receitas" fill="hsl(142, 76%, 36%)" radius={[8, 8, 0, 0]} />
-            <Bar dataKey="Despesas" fill="hsl(0, 84%, 60%)" radius={[8, 8, 0, 0]} />
+            <ChartLegend
+              verticalAlign="top"
+              align="right"
+              content={<ChartLegendContent className="pb-4 justify-end" />}
+            />
+            <Bar dataKey="income" fill="url(#financialIncome)" radius={[12, 12, 4, 4]} />
+            <Bar dataKey="expense" fill="url(#financialExpense)" radius={[12, 12, 4, 4]} />
           </BarChart>
-        </ResponsiveContainer>
+        </ChartContainer>
       </CardContent>
     </Card>
   )

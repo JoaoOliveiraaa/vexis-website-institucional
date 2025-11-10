@@ -7,6 +7,7 @@ interface ProfileSectionProps {
     email: string
     full_name: string
     role: string
+    niche?: string | null
   }
 }
 

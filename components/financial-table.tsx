@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Pencil, Search } from "lucide-react"
+import { Filter, Pencil, Search } from "lucide-react"
 import Link from "next/link"
 import { DeleteFinancialRecordButton } from "@/components/delete-financial-record-button"
 
@@ -43,126 +43,127 @@ export function FinancialTable({ records }: FinancialTableProps) {
   })
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Registros Financeiros</CardTitle>
+    <Card className="border border-border/60 bg-card/95 shadow-sm">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-base lg:text-lg text-card-foreground">Registros Financeiros</CardTitle>
+        <p className="text-sm text-muted-foreground">
+          Filtre por tipo, categoria ou descrição para acompanhar lançamentos com precisão.
+        </p>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="flex gap-4">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+        <div className="flex flex-wrap gap-3">
+          <div className="relative flex-1 min-w-[220px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Buscar por descrição ou categoria..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
+              className="h-10 rounded-2xl border-border/60 bg-background pl-10"
             />
           </div>
-          <Select value={typeFilter} onValueChange={setTypeFilter}>
-            <SelectTrigger className="w-40">
-              <SelectValue placeholder="Tipo" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Todos</SelectItem>
-              <SelectItem value="income">Receitas</SelectItem>
-              <SelectItem value="expense">Despesas</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-            <SelectTrigger className="w-40">
-              <SelectValue placeholder="Categoria" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Todas</SelectItem>
-              {categories.map((cat) => (
-                <SelectItem key={cat} value={cat}>
-                  {cat}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="flex items-center gap-3">
+            <Select value={typeFilter} onValueChange={setTypeFilter}>
+              <SelectTrigger className="h-10 w-40 rounded-2xl border-border/60 bg-background">
+                <SelectValue placeholder="Tipo" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todos</SelectItem>
+                <SelectItem value="income">Receitas</SelectItem>
+                <SelectItem value="expense">Despesas</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+              <SelectTrigger className="h-10 w-44 rounded-2xl border-border/60 bg-background">
+                <SelectValue placeholder="Categoria" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todas</SelectItem>
+                {categories.map((cat) => (
+                  <SelectItem key={cat} value={cat}>
+                    {cat}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Badge variant="outline" className="gap-2 rounded-full border-border/60 bg-background px-3 py-1 text-xs">
+              <Filter className="h-3.5 w-3.5" />
+              Ajuste os filtros para refinar os resultados
+            </Badge>
+          </div>
         </div>
 
-        <div className="border rounded-lg overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-slate-50 dark:bg-slate-900">
-                <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 dark:text-slate-400">Data</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 dark:text-slate-400">Tipo</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 dark:text-slate-400">
-                    Categoria
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 dark:text-slate-400">
-                    Descrição
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-slate-600 dark:text-slate-400">
-                    Projeto
-                  </th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-slate-600 dark:text-slate-400">Valor</th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-slate-600 dark:text-slate-400">Ações</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
-                {filteredRecords.map((record) => (
-                  <tr key={record.id} className="hover:bg-slate-50 dark:hover:bg-slate-900/50">
-                    <td className="px-4 py-3 text-sm text-slate-900 dark:text-slate-50">
-                      {new Date(record.date).toLocaleDateString("pt-BR")}
-                    </td>
-                    <td className="px-4 py-3">
-                      <Badge
-                        className={
-                          record.type === "income"
-                            ? "bg-green-200 text-green-700 dark:bg-green-900 dark:text-green-300"
-                            : "bg-red-200 text-red-700 dark:bg-red-900 dark:text-red-300"
-                        }
-                      >
-                        {record.type === "income" ? "Receita" : "Despesa"}
-                      </Badge>
-                    </td>
-                    <td className="px-4 py-3 text-sm text-slate-900 dark:text-slate-50">{record.category}</td>
-                    <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">
-                      {record.description || "-"}
-                    </td>
-                    <td className="px-4 py-3 text-sm">
-                      {record.project ? (
-                        <Link
-                          href={`/tarefas/projects/${record.project.id}`}
-                          className="text-blue-600 dark:text-blue-400 hover:underline"
-                        >
-                          {record.project.name}
-                        </Link>
-                      ) : (
-                        "-"
-                      )}
-                    </td>
-                    <td
-                      className={`px-4 py-3 text-sm font-medium text-right ${record.type === "income" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-separate border-spacing-y-2">
+            <thead className="rounded-2xl bg-muted/40 text-xs uppercase tracking-wide text-muted-foreground">
+              <tr>
+                <th className="rounded-l-2xl px-4 py-3 text-left">Data</th>
+                <th className="px-4 py-3 text-left">Tipo</th>
+                <th className="px-4 py-3 text-left">Categoria</th>
+                <th className="px-4 py-3 text-left">Descrição</th>
+                <th className="px-4 py-3 text-left">Projeto</th>
+                <th className="px-4 py-3 text-right">Valor</th>
+                <th className="rounded-r-2xl px-4 py-3 text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredRecords.map((record) => (
+                <tr
+                  key={record.id}
+                  className="rounded-2xl border border-border/60 bg-card/95 text-sm shadow-sm transition hover:-translate-y-[1px] hover:bg-accent/5"
+                >
+                  <td className="rounded-l-2xl px-4 py-3 font-medium text-card-foreground">
+                    {new Date(record.date).toLocaleDateString("pt-BR")}
+                  </td>
+                  <td className="px-4 py-3">
+                    <Badge
+                      className={
+                        record.type === "income"
+                          ? "border border-emerald-500/40 bg-emerald-500/10 text-emerald-500"
+                          : "border border-rose-500/40 bg-rose-500/10 text-rose-500"
+                      }
                     >
-                      {record.type === "income" ? "+" : "-"}R${" "}
-                      {Number(record.amount).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
-                    </td>
-                    <td className="px-4 py-3 text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <Link href={`/tarefas/financial/${record.id}/edit`}>
-                          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                            <Pencil className="h-4 w-4" />
-                          </Button>
-                        </Link>
-                        <DeleteFinancialRecordButton recordId={record.id} />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {filteredRecords.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-slate-600 dark:text-slate-400">Nenhum registro encontrado</p>
-            </div>
-          )}
+                      {record.type === "income" ? "Receita" : "Despesa"}
+                    </Badge>
+                  </td>
+                  <td className="px-4 py-3 text-card-foreground">{record.category}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{record.description || "-"}</td>
+                  <td className="px-4 py-3 text-primary">
+                    {record.project ? (
+                      <Link href={`/tarefas/projects/${record.project.id}`} className="hover:underline">
+                        {record.project.name}
+                      </Link>
+                    ) : (
+                      <span className="text-muted-foreground">-</span>
+                    )}
+                  </td>
+                  <td
+                    className={`px-4 py-3 text-right font-semibold ${
+                      record.type === "income" ? "text-emerald-500" : "text-rose-500"
+                    }`}
+                  >
+                    {record.type === "income" ? "+" : "-"}R${" "}
+                    {Number(record.amount).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                  </td>
+                  <td className="rounded-r-2xl px-4 py-3 text-right">
+                    <div className="flex items-center justify-end gap-2">
+                      <Link href={`/tarefas/financial/${record.id}/edit`}>
+                        <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full p-0">
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                      </Link>
+                      <DeleteFinancialRecordButton recordId={record.id} />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+        {filteredRecords.length === 0 && (
+          <div className="rounded-2xl border border-dashed border-primary/30 bg-card/90 py-10 text-center text-sm text-muted-foreground">
+            Nenhum registro encontrado
+          </div>
+        )}
       </CardContent>
     </Card>
   )
