@@ -40,11 +40,13 @@ export const updateClientSchema = createClientSchema.partial().extend({
 export const createProjectSchema = z.object({
   name: z.string().min(1, "Nome é obrigatório").max(200, "Nome muito longo"),
   description: z.string().max(2000, "Descrição muito longa").optional().nullable(),
-  status: z.enum(["planning", "in_progress", "on_hold", "completed", "cancelled"]),
+  status: z.enum(["planning", "active", "on_hold", "completed", "cancelled"]),
   client_id: z.string().uuid().optional().nullable(),
   start_date: z.string().datetime().optional().nullable(),
   end_date: z.string().datetime().optional().nullable(),
   budget: z.number().positive("Orçamento deve ser positivo").optional().nullable(),
+  spent: z.number().min(0, "Gasto não pode ser negativo").optional().nullable(),
+  progress: z.number().min(0).max(100).optional().nullable(),
 })
 
 export const updateProjectSchema = createProjectSchema.partial().extend({
@@ -57,10 +59,11 @@ export const createLeadSchema = z.object({
   email: z.string().email("Email inválido").optional().nullable(),
   phone: z.string().max(20, "Telefone muito longo").optional().nullable(),
   company: z.string().max(200, "Nome da empresa muito longo").optional().nullable(),
-  status: z.enum(["novo", "contatado", "qualificado", "proposta", "ganho", "perdido"]),
+  status: z.enum(["new", "contacted", "qualified", "proposal", "negotiation", "won", "lost"]),
   source: z.string().max(100, "Fonte muito longa").optional().nullable(),
   notes: z.string().max(2000, "Observações muito longas").optional().nullable(),
-  estimated_value: z.number().positive("Valor estimado deve ser positivo").optional().nullable(),
+  value: z.number().nonnegative("Valor estimado deve ser positivo").optional().nullable(),
+  assigned_to: z.string().uuid().optional().nullable(),
 })
 
 export const updateLeadSchema = createLeadSchema.partial().extend({
