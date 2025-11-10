@@ -98,9 +98,16 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 
     // 6. Sanitize
     const sanitizedBody = sanitizeObject(body)
+    const normalizedBody = {
+      ...sanitizedBody,
+      assignee_ids: Array.isArray(sanitizedBody.assigned_users)
+        ? sanitizedBody.assigned_users
+        : sanitizedBody.assignee_ids,
+    }
+    delete (normalizedBody as Record<string, unknown>).assigned_users
 
     // 7. Validate with Zod
-    const validatedData = validateData(updateTaskSchema, { ...sanitizedBody, id })
+    const validatedData = validateData(updateTaskSchema, { ...normalizedBody, id })
     
     const supabase = await createClient()
     

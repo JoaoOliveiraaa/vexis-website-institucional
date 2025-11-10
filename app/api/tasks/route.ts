@@ -86,6 +86,13 @@ export async function POST(request: NextRequest) {
 
     // 5. Sanitize input
     const sanitizedBody = sanitizeObject(body)
+    const normalizedBody = {
+      ...sanitizedBody,
+      assignee_ids: Array.isArray(sanitizedBody.assigned_users)
+        ? sanitizedBody.assigned_users
+        : sanitizedBody.assignee_ids,
+    }
+    delete (normalizedBody as Record<string, unknown>).assigned_users
 
     // 6. Check forbidden words
     if (sanitizedBody.title && containsForbiddenWords(sanitizedBody.title)) {
@@ -94,7 +101,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 7. Validate with Zod
-    const validatedData = validateData(createTaskSchema, sanitizedBody)
+    const validatedData = validateData(createTaskSchema, normalizedBody)
     
     const supabase = await createClient()
     
