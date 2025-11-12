@@ -24,7 +24,7 @@ export function Footer() {
             <p className="text-sm text-muted-foreground leading-relaxed">
               Transformando ideias em realidade digital com excelência e inovação.
             </p>
-            <p className="text-xs text-muted-foreground">CNPJ: 61.139.836/0001-86</p>
+            <p className="text-xs text-muted-foreground">CNPJ: 61.139.825/0001-86</p>
           </div>
 
           <div>
