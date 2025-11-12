@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils"
 export const dynamic = 'force-dynamic'
 
 const statusColors = {
-  planning: "bg-gradient-to-br from-primary/15 via-[oklch(0.6_0.19_240)]/15 to-accent/15 text-primary",
-  active: "bg-gradient-to-br from-primary/15 via-[oklch(0.6_0.19_240)]/15 to-accent/15 text-primary",
-  on_hold: "bg-gradient-to-br from-primary/15 via-[oklch(0.6_0.19_240)]/15 to-accent/15 text-primary",
-  completed: "bg-gradient-to-br from-primary/15 via-[oklch(0.6_0.19_240)]/15 to-accent/15 text-primary",
-  cancelled: "bg-gradient-to-br from-primary/15 via-[oklch(0.6_0.19_240)]/15 to-accent/15 text-primary",
+  planning: "bg-gradient-to-br from-primary/70 via-[oklch(0.6_0.19_240)]/70 to-accent/70 text-white shadow-sm",
+  active: "bg-gradient-to-br from-primary/70 via-[oklch(0.6_0.19_240)]/70 to-accent/70 text-white shadow-sm",
+  on_hold: "bg-gradient-to-br from-primary/70 via-[oklch(0.6_0.19_240)]/70 to-accent/70 text-white shadow-sm",
+  completed: "bg-gradient-to-br from-primary/70 via-[oklch(0.6_0.19_240)]/70 to-accent/70 text-white shadow-sm",
+  cancelled: "bg-gradient-to-br from-primary/70 via-[oklch(0.6_0.19_240)]/70 to-accent/70 text-white shadow-sm",
 }
 
 const statusLabels = {
