@@ -10,6 +10,7 @@ import {
   Plug,
   UserCog,
   Settings,
+  UserCheck,
 } from "lucide-react"
 
 export type DashboardNavItem = {
@@ -35,7 +36,7 @@ export const baseSections: DashboardSection[] = [
         title: "Dashboard",
         href: "/tarefas",
         icon: LayoutDashboard,
-        description: "Resumo geral de operações, finanças e equipe",
+  
       },
     ],
   },
@@ -47,13 +48,16 @@ export const baseSections: DashboardSection[] = [
         title: "Tarefas",
         href: "/tarefas/tasks",
         icon: CheckSquare,
-        description: "Tarefas de projetos",
+      },
+      {
+        title: "Minhas tarefas",
+        href: "/tarefas/tasks/my",
+        icon: UserCheck,
       },
       {
         title: "Projetos",
         href: "/tarefas/projects",
         icon: FolderKanban,
-        description: "Projetos e organização de tarefas",
       },
     ],
   },
@@ -65,13 +69,11 @@ export const baseSections: DashboardSection[] = [
         title: "Leads",
         href: "/tarefas/leads",
         icon: Users,
-        description: "Leads de clientes",
       },
       {
         title: "Clientes",
         href: "/tarefas/clients",
         icon: Building2,
-        description: "Gestão de contratos, contatos e feedbacks",
       },
     ],
   },
@@ -83,13 +85,11 @@ export const baseSections: DashboardSection[] = [
         title: "Financeiro",
         href: "/tarefas/financial",
         icon: DollarSign,
-        description: "Fluxo de caixa, despesas e recebíveis",
       },
       {
         title: "Relatórios",
         href: "/tarefas/reports",
         icon: BarChart3,
-        description: "KPIs, indicadores e insights avançados",
       },
     ],
   },
@@ -103,19 +103,16 @@ export const adminSection: DashboardSection = {
       title: "Integrações",
       href: "/tarefas/integrations",
       icon: Plug,
-      description: "Conecte ferramentas externas e automações",
     },
     {
       title: "Usuários",
       href: "/tarefas/users",
       icon: UserCog,
-      description: "Convites, permissões e estrutura da equipe",
     },
     {
       title: "Configurações",
       href: "/tarefas/settings",
       icon: Settings,
-      description: "Preferências gerais e identidade da conta",
     },
   ],
 }

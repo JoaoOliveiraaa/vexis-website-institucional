@@ -71,7 +71,7 @@ export function DashboardNav({ userRole }: DashboardNavProps) {
           {!collapsed && (
             <div className="space-y-0.5">
               <h1 className="text-xl font-semibold bg-gradient-to-br from-primary via-[oklch(0.6_0.19_240)] to-accent bg-clip-text text-transparent">
-                Vexis Hub
+                Vexis HUB
               </h1>
               <p className="text-xs text-muted-foreground">Central de operações</p>
             </div>
