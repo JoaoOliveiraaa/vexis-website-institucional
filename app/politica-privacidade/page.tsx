@@ -328,7 +328,7 @@ export default function PoliticaPrivacidadePage() {
                   </p>
                   <div className="space-y-2 text-muted-foreground">
                     <p><strong>Vexis - Soluções Digitais</strong></p>
-                    <p>CNPJ: 61.139.836/0001-86</p>
+                    <p>CNPJ: 61.139.825/0001-86</p>
                     <p>
                       E-mail:{" "}
                       <a href="mailto:contatooficialvexis@gmail.com" className="text-primary hover:underline">
